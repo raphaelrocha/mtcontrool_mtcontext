@@ -78,6 +78,9 @@ td{
     .line_number{
         width: 10%;
     }
+    #b1{
+        float: left;
+    }
 
     </style>
 
@@ -114,6 +117,13 @@ td{
 } ?>
 <br>
 <div class="well-button" align="right">
+    <?php echo TbHtml::Button('<i class="fa fa-arrow-left"></i> Back', array('onclick' => 'js:document.location.href="/mtcontrool/index.php/testContext/admin"',
+        'id'=>'b1',
+        'title'=>'Back',
+        'color'=>TbHtml::BUTTON_COLOR_DEFAULT,
+        'size'=>TbHtml::BUTTON_SIZE_SMALL,
+        'style'=>'color: green;',)  );
+    ?>
     <?php if($notEdit!="true"):?>
         <?php echo TbHtml::Button(
             '<i class="fa fa-pencil-square-o"></i> Edit',array(
