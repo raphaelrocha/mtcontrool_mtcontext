@@ -36,12 +36,12 @@ class TestContext extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('DESCRIPTION, ID_USER, ID_APP, ID_PLATFORM, ID_DEVICE', 'required'),
-			array('ID_USER, ID_APP, ID_PLATFORM, ID_DEVICE', 'numerical', 'integerOnly'=>true),
-			array('DESCRIPTION', 'length', 'max'=>50),
-			// The following rule is used by search().
-			// @todo Please remove those attributes that should not be searched.
-			array('ID, ID_USER, ID_APP, ID_PLATFORM, ID_DEVICE, DESCRIPTION, iDUSER.name, iDAPP.name, iDPLATFORM.name, iDDEVICE.DESCRIPTION, elementInsts.ID_TEST_CONTEXT', 'safe', 'on'=>'search'),
+			array('description, id_user, id_app, id_platform, id_device', 'required'),
+			array('id_user, id_app, id_platform, id_device', 'numerical', 'integerOnly'=>true),
+			array('description', 'length', 'max'=>50),
+			// the following rule is used by search().
+			// @todo please remove those attributes that should not be searched.
+			array('id, id_user, id_app, id_platform, id_device, description, iduser.name, idapp.name, idplatform.name, iddevice.description, elementinsts.id_test_context', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -53,11 +53,11 @@ class TestContext extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'elementInsts' => array(self::HAS_MANY, 'ElementInst', 'ID_TEST_CONTEXT'),
-			'iDUSER' => array(self::BELONGS_TO, 'Users', 'ID_USER'),
-			'iDAPP' => array(self::BELONGS_TO, 'App', 'ID_APP'),
-			'iDPLATFORM' => array(self::BELONGS_TO, 'Platforms', 'ID_PLATFORM'),
-			'iDDEVICE' => array(self::BELONGS_TO, 'Device', 'ID_DEVICE'),
+			'elementInsts' => array(self::HAS_MANY, 'ElementInst', 'id_test_context'),
+			'iDUSER' => array(self::BELONGS_TO, 'Users', 'id_user'),
+			'iDAPP' => array(self::BELONGS_TO, 'App', 'id_app'),
+			'iDPLATFORM' => array(self::BELONGS_TO, 'Platforms', 'id_platform'),
+			'iDDEVICE' => array(self::BELONGS_TO, 'Device', 'id_device'),
 		);
 	}
 
@@ -67,12 +67,12 @@ class TestContext extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'ID' => 'ID',
-			'ID_USER' => 'Id User',
-			'ID_APP' => 'App',
-			'ID_PLATFORM' => 'Platform',
-			'ID_DEVICE' => 'Device',
-			'DESCRIPTION' => 'Name',
+			'id' => 'ID',
+			'id_user' => 'Id User',
+			'id_app' => 'App',
+			'id_platform' => 'Platform',
+			'id_device' => 'Device',
+			'description' => 'Name',
 		);
 	}
 
@@ -94,21 +94,17 @@ class TestContext extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('ID',$this->ID);
-		//$criteria->compare('ID_USER',$this->ID_USER);
-		//$criteria->compare('ID_APP',$this->ID_APP);
-		//$criteria->compare('ID_PLATFORM',$this->ID_PLATFORM);
-		//$criteria->compare('ID_DEVICE',$this->ID_DEVICE);
-		$criteria->compare('DESCRIPTION',$this->DESCRIPTION,true);
+		$criteria->compare('id',$this->id);
+		$criteria->compare('description',$this->description,true);
 
 
 		$criteria->with=array('iDUSER','iDAPP','iDPLATFORM','iDDEVICE','elementInsts');
 		//$criteria->with=array('iDBRAND');
-		$criteria->compare('iDUSER.name',$this->ID_USER, true);
-		$criteria->compare('iDAPP.name',$this->ID_APP, true);
-		$criteria->compare('iDPLATFORM.name',$this->ID_PLATFORM, true);
-		$criteria->compare('iDDEVICE.DESCRIPTION',$this->ID_DEVICE, true);
-		$criteria->compare('elementInsts.ID_TEST_CONTEXT',$this->ID, true);
+		$criteria->compare('iDUSER.name',$this->id_user, true);
+		$criteria->compare('iDAPP.name',$this->id_app, true);
+		$criteria->compare('iDPLATFORM.name',$this->id_platform, true);
+		$criteria->compare('iDDEVICE.description',$this->id_device, true);
+		$criteria->compare('elementInsts.id_test_context',$this->id, true);
 
 		return new CActiveDataProvider($this, array(
 			'pagination' => array(
@@ -118,32 +114,7 @@ class TestContext extends CActiveRecord
 		));
 	}
 
-	/*public function platform_list($id){
-
-		$testModel=$this->findAllBySql('SELECT * FROM TEST_CONTEXT WHERE ID ='.$id);
-
-
-		$cont=0;
-
-		$return='';
-		foreach($testModel as $value ){
-
-			while( array_key_exists($cont, $value->iDPLATFORM)){
-				if($return==''){
-					$return =  $value->iDPLATFORM[$cont]->name;
-				}else{
-					$return =  $return." / ".$value->iDPLATFORM[$cont]->name;
-				}
-				
-		 		$cont++;
-			}
-		 
-		 $cont=0;
-		}
-		return $return;
-	}*/
-
-
+	
 	/**
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!

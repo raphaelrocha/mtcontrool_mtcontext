@@ -38,7 +38,7 @@ class ElementInst extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('id_element, id_test_context, element_type, description', 'required'),
-			array('id_element, id_test_context', 'numerical', 'integeronly'=>true),
+			array('id_element, id_test_context', 'numerical', 'integerOnly'=>true),
 			//array('start_param, end_param', 'numerical', 'integeronly'=>true),
 			array('element_type', 'length', 'max'=>10),
 			array('description', 'length', 'max'=>50),

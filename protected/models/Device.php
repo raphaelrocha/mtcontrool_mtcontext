@@ -32,7 +32,7 @@ class Device extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('id_brand, description, id_platform', 'required'),
-			array('id_brand', 'numerical', 'integer only'=>true),
+			array('id_brand', 'numerical', 'integerOnly'=>true),
 			array('description', 'length', 'max'=>50),
 			// the following rule is used by search().
 			// @todo please remove those attributes that should not be searched.

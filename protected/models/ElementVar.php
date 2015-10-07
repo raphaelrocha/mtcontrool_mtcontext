@@ -30,7 +30,7 @@ class ElementVar extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('id_element, description', 'required'),
-			array('id_element', 'numerical', 'integeronly'=>true),
+			array('id_element', 'numerical', 'integerOnly'=>true),
 			array('description', 'length', 'max'=>50),
 			// the following rule is used by search().
 			// @todo please remove those attributes that should not be searched.

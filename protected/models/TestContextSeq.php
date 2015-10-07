@@ -33,14 +33,14 @@ class TestContextSeq extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('ID_TEST_CONTEXT', 'required'),
-			array('ID_TEST_CONTEXT, SEQUENCE_ORDER', 'numerical', 'integerOnly'=>true),
-			array('VARIATION, BEHAVIOR', 'length', 'max'=>10000),
-			array('BEHAVIOR_SCREEN', 'length', 'max'=>300),
-			//array('BEHAVIOR_SCREEN', 'file', 'types' => 'jpg, png, jpeg', 'allowEmpty'=>true),
-			// The following rule is used by search().
-			// @todo Please remove those attributes that should not be searched.
-			array('ID, ID_TEST_CONTEXT, SEQUENCE_ORDER, VARIATION, BEHAVIOR, BEHAVIOR_SCREEN', 'safe', 'on'=>'search'),
+			array('id_test_context', 'required'),
+			array('id_test_context, sequence_order', 'numerical', 'integerOnly'=>true),
+			array('variation, behavior', 'length', 'max'=>10000),
+			array('behavior_screen', 'length', 'max'=>300),
+			//array('behavior_screen', 'file', 'types' => 'jpg, png, jpeg', 'allowempty'=>true),
+			// the following rule is used by search().
+			// @todo please remove those attributes that should not be searched.
+			array('id, id_test_context, sequence_order, variation, behavior, behavior_screen', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -52,7 +52,7 @@ class TestContextSeq extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'iDTESTCONTEXT' => array(self::BELONGS_TO, 'TestContext', 'ID_TEST_CONTEXT'),
+			'iDTESTCONTEXT' => array(self::BELONGS_TO, 'TestContext', 'id_test_context'),
 		);
 	}
 
@@ -62,13 +62,13 @@ class TestContextSeq extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'ID' => 'ID',
-			'ID_TEST_CONTEXT' => 'Id Test Context',
-			'SEQUENCE_ORDER' => 'Sequence Order',
-			'VARIATION' => 'Variation',
-			'BEHAVIOR' => 'Behavior',
-			'BEHAVIOR_SCREEN' => 'Behavior Screen',
-			'DATE_TIME' => 'Date Time',
+			'id' => 'ID',
+			'id_test_context' => 'Id Test Context',
+			'sequence_order' => 'Sequence Order',
+			'variation' => 'Variation',
+			'behavior' => 'Behavior',
+			'behavior_screen' => 'Behavior Screen',
+			'date_time' => 'Date Time',
 		);
 	}
 
@@ -90,13 +90,13 @@ class TestContextSeq extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('ID',$this->ID);
-		$criteria->compare('ID_TEST_CONTEXT',$this->ID_TEST_CONTEXT);
-		$criteria->compare('SEQUENCE_ORDER',$this->SEQUENCE_ORDER);
-		$criteria->compare('VARIATION',$this->VARIATION,true);
-		$criteria->compare('BEHAVIOR',$this->BEHAVIOR,true);
-		$criteria->compare('BEHAVIOR_SCREEN',$this->BEHAVIOR_SCREEN,true);
-		$criteria->compare('DATE_TIME',$this->DATE_TIME,true);
+		$criteria->compare('id',$this->id);
+		$criteria->compare('id_test_context',$this->id_test_context);
+		$criteria->compare('sequence_order',$this->sequence_order);
+		$criteria->compare('variation',$this->variation,true);
+		$criteria->compare('behavior',$this->behavior,true);
+		$criteria->compare('behavior_screen',$this->behavior_screen,true);
+		$criteria->compare('date_time',$this->date_time,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

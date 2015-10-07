@@ -30,7 +30,7 @@ class ElementPlatform extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('id_element, id_platform', 'required'),
-			array('id_element, id_platform', 'numerical', 'integeronly'=>true),
+			array('id_element, id_platform', 'numerical', 'integerOnly'=>true),
 			// the following rule is used by search().
 			// @todo please remove those attributes that should not be searched.
 			array('id_element, id_platform', 'safe', 'on'=>'search'),
