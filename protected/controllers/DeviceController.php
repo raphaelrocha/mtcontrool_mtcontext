@@ -120,7 +120,7 @@ class DeviceController extends Controller
 		if (isset($_POST['Device'])) {
 			$model->attributes=$_POST['Device'];
 			/*GARENTE QUE O NOME DO DEVICE SEMPRE SEJA SALVO EM MAIÚSCULO*/
-			$model->DESCRIPTION = strtoupper($model->description);
+			$model->description = strtoupper($model->description);
 			if ($model->save()) {
 				$this->redirect(array('admin','id'=>$model->id));
 			}
