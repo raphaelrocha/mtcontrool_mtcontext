@@ -18,7 +18,6 @@
 
 <?php $this->widget('bootstrap.widgets.TbBreadcrumb', array(
     'links' => array(
-       //'Site'=>array('site/index'),
 	'Manage Devices',
     ),
 )); 
@@ -27,21 +26,16 @@
 
 <div class="well-button">
 
-              <?php echo TbHtml::Button('<i class="fa fa-arrow-left"></i> Back', array('onclick' => 'js:document.location.href="/mtcontrool"',
-                      'id'=>'b1',
-                      'title'=>'Back',
-                    'color'=>TbHtml::BUTTON_COLOR_DEFAULT,
-		    'size'=>TbHtml::BUTTON_SIZE_SMALL,
-                   
-                  //  'htmlButton'=>'style'=>'color: red',
-                     'style'=>'color: green;',
-                  
-                
-              )  ); ?>
-            
-             
-                
-        </div>
+	<?php echo TbHtml::Button('<i class="fa fa-arrow-left"></i> Back', array('onclick' => 'js:document.location.href="/mtcontrool"',
+		'id'=>'b1',
+		'title'=>'Back',
+		'color'=>TbHtml::BUTTON_COLOR_DEFAULT,
+		'size'=>TbHtml::BUTTON_SIZE_SMALL,
+		'style'=>'color: green;',
+
+		)  ); 
+	?>
+</div>
 
 
 <?php $this->widget('bootstrap.widgets.TbGridView',array(
