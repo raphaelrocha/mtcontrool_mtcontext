@@ -50,7 +50,7 @@ $this->menu=array(
 		array(
 			'header'=>'Device',
 			'filter'=>CHtml::listData(Device::model()->findAll(),'description', 'description'),
-			'name'=>'ID_DEVICE',
+			'name'=>'id_device',
 			'value'=>'$data->iDDEVICE->description'
 		),
 		'description',

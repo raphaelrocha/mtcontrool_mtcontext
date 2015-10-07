@@ -135,7 +135,7 @@
                                       ));  
                             ?>
 
-            <?php echo $form->dropDownListControlGroup($model,'ID_DEVICE',$devicesArray,array('id'=>'dd2','empty'=>'--- Choose a device ---')); ?>
+            <?php echo $form->dropDownListControlGroup($model,'id_device',$devicesArray,array('id'=>'dd2','empty'=>'--- Choose a device ---')); ?>
             
             
 
