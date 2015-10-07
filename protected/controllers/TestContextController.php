@@ -69,7 +69,7 @@ class TestContextController extends Controller
 	public function actionCreate()
 	{
 		$model=new TestContext;
-		$model->ID_USER = Yii::app()->user->getId();
+		$model->id_user = Yii::app()->user->getId();
 
 		$modelsApps= App::model()->findAll();
 		$appsArray = CHtml::listData($modelsApps, 'id', 'name');
@@ -129,7 +129,7 @@ class TestContextController extends Controller
 	{
 		$model=$this->loadModel($id);
 
-		$sql = "SELECT COUNT(*) FROM TEST_CONTEXT_SEQ WHERE ID_TEST_CONTEXT = ".$id;
+		$sql = "SELECT COUNT(*) FROM test_context_seq WHERE id_test_context = ".$id;
 		$numSeqs = Yii::app()->db->createCommand($sql)->queryScalar();
 		//echo $numSeqs;
 
@@ -382,9 +382,8 @@ class TestContextController extends Controller
 		
     	$modelTestContext = TestContext::model()->findByPk($idTestContext);
 
-		//echo "ID TEST_CONTEXT: ".$idTestContext;
-		//echo "DESCRIPTION TEST_CONTEXT: ".$modelTestContext->DESCRIPTION;
-
+		
+		
 		$vector = new ArrayObject(); 
 	
     	foreach ($matrixElementsInstances as $key=>$element) {
