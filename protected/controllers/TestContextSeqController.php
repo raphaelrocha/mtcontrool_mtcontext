@@ -80,11 +80,11 @@ class TestContextSeqController extends Controller
 
 		foreach ($array_sequences as $key => $value) {
 			$model=new TestContextSeq;
-			$model->ID_TEST_CONTEXT = $id_test_context;
-			$model->SEQUENCE_ORDER = $array_sequences[$key][0];
-			$model->VARIATION = $array_sequences[$key][1];
-			$model->BEHAVIOR = $array_sequences[$key][2];
-			$model->BEHAVIOR_SCREEN = $array_sequences[$key][3];
+			$model->id_test_context = $id_test_context;
+			$model->sequence_order = $array_sequences[$key][0];
+			$model->variation = $array_sequences[$key][1];
+			$model->behavior = $array_sequences[$key][2];
+			$model->behavior_screen = $array_sequences[$key][3];
 			array_push($arrayModels, $model);
 		}
 
@@ -110,9 +110,9 @@ class TestContextSeqController extends Controller
 				//verifica se o checkbox foi marcado
 				$chkKey = "chk".$cont;
 				if (isset($_POST[$chkKey])) {
-					$arrayModels[$cont]->ID_TEST_CONTEXT = $id_test_context;
-					$arrayModels[$cont]->VARIATION = $_POST["variation".$cont];
-					$arrayModels[$cont]->BEHAVIOR = $_POST["behavior".$cont];
+					$arrayModels[$cont]->id_test_context = $id_test_context;
+					$arrayModels[$cont]->variation = $_POST["variation".$cont];
+					$arrayModels[$cont]->behavior = $_POST["behavior".$cont];
 					$fileKey = "uploadFile".$cont;
 					//verifica se tem arquivo no temp.
 					if(isset($_FILES[$fileKey]["name"])){
@@ -123,7 +123,7 @@ class TestContextSeqController extends Controller
 							//gera um time stamp do momento do upload.
 		        			$now = date("F j, Y, g:i a");
 		        			//gera um nome padrão do sistema para o arquivo upado e aplica um mp5 para codificar o nome.
-		        			$file_name = md5($arrayModels[$cont]->ID_TEST_CONTEXT."_sequence_test_context_".$arrayModels[$cont]->SEQUENCE_ORDER."_".$now.".".$ext);
+		        			$file_name = md5($arrayModels[$cont]->id_test_context."_sequence_test_context_".$arrayModels[$cont]->sequence_order."_".$now.".".$ext);
 		        			//concatena o nome gerado com a extensão.
 		        			$file_name = $file_name.".".$ext;
 		        			//$target_file = Yii::app()->params['uploadDirTestContext'] . basename($_FILES[$fileKey]["name"]);
@@ -132,11 +132,11 @@ class TestContextSeqController extends Controller
 		        			//salva o arquivo no diretorio
 		        			if (move_uploaded_file($_FILES[$fileKey]["tmp_name"], $target_file)) {
 		        				//se o salvamento deu certo, o nome é salvo no banco de dados.
-		        				$arrayModels[$cont]->BEHAVIOR_SCREEN = $file_name;
+		        				$arrayModels[$cont]->behavior_screen = $file_name;
 
 		        			}else{
 		        				//erro no salvamento
-		        				$arrayModels[$cont]->BEHAVIOR_SCREEN = "no_file";
+		        				$arrayModels[$cont]->behavior_screen = "no_file";
 		        			}
 						}
 						//salva sequencia no banco de dados
@@ -158,18 +158,11 @@ class TestContextSeqController extends Controller
 			foreach ($arrayModels as $model) {
 				$row_data_dashboard = array();
 				$row_data_dashboard[0]=$cont;
-				$row_data_dashboard[1]=$model->VARIATION;
-				$row_data_dashboard[2]=$model->BEHAVIOR;
-				//$screen = "<a href='/mtcontrool/upload_testcontext/".$model->BEHAVIOR_SCREEN."' target='_blank'>print</a>, ";
-				$screen = $model->BEHAVIOR_SCREEN;
+				$row_data_dashboard[1]=$model->variation;
+				$row_data_dashboard[2]=$model->behavior;
+				$screen = $model->behavior_screen;
 				$row_data_dashboard[3]=$screen;
 
-				//echo $model->SEQUENCE_ORDER." | ".$model->VARIATION." | ".$model->BEHAVIOR." | ".$model->BEHAVIOR_SCREEN;  
-				//echo "<br><br>";
-				
-				//if ($model->save()) {
-				//	$this->redirect(array('view','id'=>$model->ID));
-				//}
 				
 				array_push($raw_data_dashboard, $row_data_dashboard);
 				$totalTests++;
@@ -182,7 +175,7 @@ class TestContextSeqController extends Controller
 				$dados_dashboard['dados']=$raw_data_dashboard;
 				$dados_dashboard['json']=null;
 				$dados_dashboard['json']=json_encode($raw_data_dashboard);
-				$dados_dashboard['nome_teste']=$modelTestContext->DESCRIPTION;
+				$dados_dashboard['nome_teste']=$modelTestContext->description;
 				Yii::app()->user->setState('dados_dashbord_final', $dados_dashboard);
 				$this->redirect("/mtcontrool/index.php/testContext/dashboard");
 			}else{
@@ -212,7 +205,7 @@ class TestContextSeqController extends Controller
 		if (isset($_POST['TestContextSeq'])) {
 			$model->attributes=$_POST['TestContextSeq'];
 			if ($model->save()) {
-				$this->redirect(array('view','id'=>$model->ID));
+				$this->redirect(array('view','id'=>$model->id));
 			}
 		}
 
@@ -246,10 +239,7 @@ class TestContextSeqController extends Controller
 	 */
 	public function actionIndex()
 	{
-		/*$dataProvider=new CActiveDataProvider('TestContextSeq');
-		$this->render('index',array(
-			'dataProvider'=>$dataProvider,
-		));*/
+
 		$this->redirect("/mtcontrool/index.php/testContext/admin");
 	}
 
@@ -258,15 +248,7 @@ class TestContextSeqController extends Controller
 	 */
 	public function actionAdmin()
 	{
-		/*$model=new TestContextSeq('search');
-		$model->unsetAttributes();  // clear any default values
-		if (isset($_GET['TestContextSeq'])) {
-			$model->attributes=$_GET['TestContextSeq'];
-		}
 
-		$this->render('admin',array(
-			'model'=>$model,
-		));*/
 		$this->redirect("/mtcontrool/index.php/testContext/admin");
 	}
 

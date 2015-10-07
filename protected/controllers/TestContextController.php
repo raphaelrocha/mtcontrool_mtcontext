@@ -88,14 +88,12 @@ class TestContextController extends Controller
 			$name = $user->name;
 		}
 
-		//$modelsDevice= Device::model()->findAll();
-		//$devicesArray = CHtml::listData($modelsDevice, 'ID', 'DESCRIPTION');
 		$devicesArray = array();
 		
 		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
+		
 		if (isset($_POST['buttonCancel'])) {
-				//$_SESSION['flag-test-context-form']=null;
+				
 				$this->redirect(array('admin'/*,'id'=>$model->ID*/));
 	    }
 
@@ -105,9 +103,9 @@ class TestContextController extends Controller
 			//$_SESSION['flag-test-context-form']=null;
 			$model->attributes=$_POST['TestContext'];
 			if ($model->save()) {
-				Yii::app()->user->setState('idTestContext', $model->ID);
-				Yii::app()->user->setState('idDevice', $model->ID_DEVICE);
-				//$this->redirect("/mtcontrool/index.php/elementInst/create1?idTestContext=".$model->ID."&idDevice=".$model->ID_DEVICE);
+				Yii::app()->user->setState('idTestContext', $model->id);
+				Yii::app()->user->setState('idDevice', $model->id_device);
+				
 				$this->redirect("/mtcontrool/index.php/elementInst/create1");
 			}
 
@@ -153,26 +151,26 @@ class TestContextController extends Controller
 		$platformsArray = CHtml::listData($modelsPlatforms, 'id', 'name');
 
 		$modelsDevice= Device::model()->findAll(array(
-		                                    'select'=>'ID,DESCRIPTION',
-		                                    'condition'=>"ID_PLATFORM='$model->ID_PLATFORM'"
+		                                    'select'=>'id,description',
+		                                    'condition'=>"id_platform='$model->id_platform'"
 		                                  ));
-		$devicesArray = CHtml::listData($modelsDevice, 'ID', 'DESCRIPTION');
+		$devicesArray = CHtml::listData($modelsDevice, 'id', 'description');
 
 		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
+		
 		if (isset($_POST['buttonCancel'])) {
-			//$_SESSION['flag-test-context-form']=null;
-			$this->redirect(array('admin'/*,'id'=>$model->ID*/));
+			
+			$this->redirect(array('admin'));
 		}
 
 		if (isset($_POST['TestContext'])) {
-			//$_SESSION['flag-test-context-form']=null;
+			
 			$model->attributes=$_POST['TestContext'];
 			if ($model->save()) {
-				//$this->redirect(array('admin','id'=>$model->ID));
-				Yii::app()->user->setState('idTestContext', $model->ID);
-				Yii::app()->user->setState('idDevice', $model->ID_DEVICE);
-				//$this->redirect("/mtcontrool/index.php/elementInst/update?idTestContext=".$model->ID."&idDevice=".$model->ID_DEVICE);				
+				
+				Yii::app()->user->setState('idTestContext', $model->id);
+				Yii::app()->user->setState('idDevice', $model->id_device);
+								
 				$this->redirect("/mtcontrool/index.php/elementInst/update1");
 			}
 		}
@@ -273,11 +271,11 @@ class TestContextController extends Controller
         if(isset($_POST['categoryid']) && $_POST['categoryid']!=''){
 	        $categoryid=$_POST['categoryid'];
 	        $usertype=Device::model()->findAll(array(
-	                                    'select'=>'ID,DESCRIPTION',
-	                                    'condition'=>"ID_PLATFORM='$categoryid'"
+	                                    'select'=>'id,description',
+	                                    'condition'=>"id_platform='$categoryid'"
 	                                  ));       
 	              
-	        $data=CHtml::listData($usertype,'ID','DESCRIPTION');
+	        $data=CHtml::listData($usertype,'id','description');
 	        echo CHtml::tag('option',array('value' => ''),
 	                           CHtml::encode('--- Choose a device ---'),true);
 	 
@@ -293,9 +291,7 @@ class TestContextController extends Controller
 
     public function actionResume($idTestContext){
 
-    	//$arrayModels = Yii::app()->user->getState('arrayModels');
-    	//$dataProvider=new CActiveDataProvider('TestContext');
-    	$sql = "SELECT COUNT(*) FROM TEST_CONTEXT_SEQ WHERE ID_TEST_CONTEXT = ".$idTestContext;
+    	$sql = "SELECT COUNT(*) FROM test_context_seq WHERE id_test_context = ".$idTestContext;
 		$numSeqs = Yii::app()->db->createCommand($sql)->queryScalar();		
 		$notEdit="false";
 		if($numSeqs>0){
@@ -303,12 +299,12 @@ class TestContextController extends Controller
 		}
 
     	$criteria=new CDbCriteria(array(                    
-                                'condition'=>'ID='.$idTestContext));
+                                'condition'=>'id='.$idTestContext));
     	$dataProvider=new CActiveDataProvider('TestContext', array(
             'criteria'=>$criteria,
     	));
 
-    	$criteriaInst=new CDbCriteria(array( 'condition'=>'ID_TEST_CONTEXT='.$idTestContext,
+    	$criteriaInst=new CDbCriteria(array( 'condition'=>'id_test_context='.$idTestContext,
                                 
 								    		));
 
@@ -318,7 +314,7 @@ class TestContextController extends Controller
             
     	));
 
-		$arrayModels = ElementInst::model()->findAllBySql("SELECT * FROM ELEMENT_INST WHERE ID_TEST_CONTEXT=".$idTestContext." ORDER BY ELEMENT_TYPE, ID_ELEMENT ASC");
+		$arrayModels = ElementInst::model()->findAllBySql("SELECT * FROM element_inst WHERE id_test_context=".$idTestContext." ORDER BY element_type, id_element ASC");
 
 		$this->render('resume',array(
 			'notEdit'=>$notEdit,
@@ -334,7 +330,7 @@ class TestContextController extends Controller
     */
     public function actionMef($idTestContext){
 
-    	$sql = "SELECT COUNT(*) FROM TEST_CONTEXT_SEQ WHERE ID_TEST_CONTEXT = ".$idTestContext;
+    	$sql = "SELECT COUNT(*) FROM test_context_seq WHERE id_test_context = ".$idTestContext;
 		$numSeqs = Yii::app()->db->createCommand($sql)->queryScalar();
 
 		if($numSeqs>0){
@@ -349,7 +345,7 @@ class TestContextController extends Controller
     	//AQUI É FEITA UMA BUSCA POR TODOS OS ELEMENTOS CADASTRADOS NO BANCO.
     	$elements = Element::model()->findAll();
 
-    	$sql_countElements = "SELECT * FROM TEST_CONTEXT JOIN ELEMENT_INST ON (TEST_CONTEXT.ID = ELEMENT_INST.ID_TEST_CONTEXT)  WHERE TEST_CONTEXT.ID=$idTestContext GROUP BY ID_ELEMENT";
+    	$sql_countElements = "SELECT * FROM test_context JOIN element_inst ON (test_context.id = element_inst.id_test_context)  WHERE test_context.id=$idTestContext GROUP BY id_element";
     	$result_countElements = Yii::app ()->db->createCommand ( $sql_countElements )->queryAll ();
 
     	$totalElements=0;
@@ -366,11 +362,11 @@ class TestContextController extends Controller
     	*/
     	foreach ($elements as $item) {
     		$instances = ElementInst::model()->FindAllByAttributes(
-    									array("ID_ELEMENT"=>$item->ID,
-    										  "ID_TEST_CONTEXT"=>$idTestContext
+    									array("id_element"=>$item->id,
+    										  "id_test_context"=>$idTestContext
     										  ));
     		if(sizeof($instances)>0){
-    			$matrixElementsInstances[$item->DESCRIPTION] = $instances;
+    			$matrixElementsInstances[$item->description] = $instances;
     		}
     	}
 
@@ -415,7 +411,7 @@ class TestContextController extends Controller
 			//ElementsParalax() retorna um array com o schema do xml já trabalhado
 		    $schema = $xmlGerator->ElementsParalax();
 			//prepara o xml e inicia o download passando o schema e o título
-			$this->BuildXml($schema, $modelTestContext->DESCRIPTION);
+			$this->BuildXml($schema, $modelTestContext->description);
 		} else {
 			//ElementsParalaxTable() retorna um array com os objetos já trabalhados contendo todo o modelo passado pelo BD
 			$schema = $xmlGerator->ElementsParalaxTable();
@@ -438,15 +434,15 @@ class TestContextController extends Controller
 					//print_r($model);
 					//$model é uuma instância de ELEMENT_INST
 					//echo $model->iDELEMENT->DESCRIPTION;
-					$variatins .= $model->iDELEMENT->DESCRIPTION.": ".$model->DESCRIPTION;
-					if($model->ELEMENT_TYPE=="interval"){
-						$variatins .= " (START = ".$model->START_PARAM."; END = ".$model->END_PARAM.")";
+					$variatins .= $model->iDELEMENT->description.": ".$model->description;
+					if($model->element_type=="interval"){
+						$variatins .= " (START = ".$model->start_param."; END = ".$model->end_param.")";
 					}
 					$variatins .= "\n";
-					$behavior .= $model->BEHAVIOR.", ";
-						if($model->BEHAVIOR_SCREEN != ""){
-							//$screen .= "<a href='/mtcontrool/upload_testcontext/".$model->BEHAVIOR_SCREEN."' target='_blank'>img".$x."</a>, ";
-							$screen .= $model->BEHAVIOR_SCREEN;
+					$behavior .= $model->behavior.", ";
+						if($model->behavior_screen != ""){
+							
+							$screen .= $model->behavior_screen;
 							
 						}
 					$x++;
@@ -463,10 +459,10 @@ class TestContextController extends Controller
     	/*
     	ARQUI SERÁ A CHAMADA PARA A FUNÇÃO QUE MONTARA O XML.
     	*/
-    	$nomePlataforma = Platforms::model ()->findByPk ( $modelTestContext->ID_PLATFORM );
-    	$nomeApp = App::model ()->findByPk ( $modelTestContext->ID_APP );
-    	$device = Device::model ()->findByPk ( $modelTestContext->ID_DEVICE );
-    	$user = Users::model ()->findByPk ( $modelTestContext->ID_USER );
+    	$nomePlataforma = Platforms::model ()->findByPk ( $modelTestContext->id_platform );
+    	$nomeApp = App::model ()->findByPk ( $modelTestContext->id_app );
+    	$device = Device::model ()->findByPk ( $modelTestContext->id_device );
+    	$user = Users::model ()->findByPk ( $modelTestContext->id_user );
     	$jsonPrint = json_encode($rawData);
 
     	$dados_dashboard =  array (
@@ -492,7 +488,7 @@ class TestContextController extends Controller
 
     //CARREGA OS DADOS NECESSÁRIOS PARA CONSTRUÇÃO DO DASHBOARD
     public function actionInidashboard($idTestContext){
-    	$sql='SELECT * FROM TEST_CONTEXT_SEQ WHERE ID_TEST_CONTEXT = '.$idTestContext;
+    	$sql='SELECT * FROM test_context_seq WHERE id_test_context = '.$idTestContext;
 		$arrayModels=TestContextSeq::model()->findAllBySql($sql); 
 		$modelTestContext = TestContext::model()->findByPk($idTestContext);
 
@@ -502,23 +498,20 @@ class TestContextController extends Controller
 		foreach ($arrayModels as $model) {
 			$row_data_dashboard = array();
 			$row_data_dashboard[0]=$cont;
-			$row_data_dashboard[1]=$model->VARIATION;
-			$row_data_dashboard[2]=$model->BEHAVIOR;
-			//$screen = "<a href='/mtcontrool/upload_testcontext/".$model->BEHAVIOR_SCREEN."' target='_blank'>print</a>, ";
-			$screen = $model->BEHAVIOR_SCREEN;
+			$row_data_dashboard[1]=$model->variation;
+			$row_data_dashboard[2]=$model->behavior;
+			$screen = $model->behavior_screen;
 			$row_data_dashboard[3]=$screen;
-
-			
 			array_push($raw_data_dashboard, $row_data_dashboard);
 			$totalTests++;
 		}
 
-		$nomePlataforma = Platforms::model ()->findByPk ( $modelTestContext->ID_PLATFORM );
-    	$nomeApp = App::model ()->findByPk ( $modelTestContext->ID_APP );
-    	$device = Device::model ()->findByPk ( $modelTestContext->ID_DEVICE );
-    	$user = Users::model ()->findByPk ( $modelTestContext->ID_USER );
+		$nomePlataforma = Platforms::model ()->findByPk ( $modelTestContext->id_platform );
+    	$nomeApp = App::model ()->findByPk ( $modelTestContext->id_app );
+    	$device = Device::model ()->findByPk ( $modelTestContext->id_device );
+    	$user = Users::model ()->findByPk ( $modelTestContext->id_user );
 
-    	$sql_countElements = "SELECT * FROM TEST_CONTEXT JOIN ELEMENT_INST ON (TEST_CONTEXT.ID = ELEMENT_INST.ID_TEST_CONTEXT)  WHERE TEST_CONTEXT.ID=$idTestContext GROUP BY ID_ELEMENT";
+    	$sql_countElements = "SELECT * FROM test_context JOIN element_inst ON (test_context.id = element_inst.id_test_context)  WHERE test_context.id=$idTestContext GROUP BY id_element";
     	$result_countElements = Yii::app ()->db->createCommand ( $sql_countElements )->queryAll ();
 
     	$totalElements=0;
@@ -551,7 +544,7 @@ class TestContextController extends Controller
 		$dados_dashboard['dados']=$raw_data_dashboard;
 		$dados_dashboard['json']=null;
 		$dados_dashboard['json']=json_encode($raw_data_dashboard);
-		$dados_dashboard['nome_teste']=$modelTestContext->DESCRIPTION;
+		$dados_dashboard['nome_teste']=$modelTestContext->description;
 		Yii::app()->user->setState('dados_dashbord_final', $dados_dashboard);
 		$this->redirect("/mtcontrool/index.php/testContext/dashboard");
     }
@@ -578,7 +571,6 @@ class TestContextController extends Controller
 
 		    	$dados = json_decode($json);
 
-		    	
 
 					echo "<br>";
 
@@ -878,18 +870,18 @@ class TestContextController extends Controller
 		//$nodeTwo = $dom->createElement('nodeTwo');
 		 
 		//criados os elementos, vamos adicionar um valor para cada um deles
-		$idTxt = $dom->createTextNode($model->ID);
-		$userTxt = $dom->createTextNode($model->ID_USER);
+		$idTxt = $dom->createTextNode($model->id);
+		$userTxt = $dom->createTextNode($model->id_user);
 
-		$appIdTxt = $dom->createTextNode($model->ID_APP);
+		$appIdTxt = $dom->createTextNode($model->id_app);
 		$appNameTxt = $dom->createTextNode($model->iDAPP->name);
 
-		$platformIdTxt = $dom->createTextNode($model->ID_PLATFORM);
+		$platformIdTxt = $dom->createTextNode($model->id_platform);
 		$platformNameTxt = $dom->createTextNode($model->iDPLATFORM->name);
 
-		$deviceIdTxt = $dom->createTextNode($model->ID_DEVICE);
-		$deviceNameTxt = $dom->createTextNode($model->iDDEVICE->DESCRIPTION);
-		$descriptionTxt = $dom->createTextNode($model->DESCRIPTION);
+		$deviceIdTxt = $dom->createTextNode($model->id_device);
+		$deviceNameTxt = $dom->createTextNode($model->iDDEVICE->description);
+		$descriptionTxt = $dom->createTextNode($model->description);
 
 		/*preencher com todas as instancias de elementos*/
 		//Pronto! Elementos criados, o próximo passo é organizar essa bagunça, para isso, usaremos o método appendChild() e diremos quem é elemento pai e quem é elemento filho
@@ -925,17 +917,17 @@ class TestContextController extends Controller
 		foreach($model->elementInsts as $value ){
 			$instanceElement = $dom->createElement('instance-element-'.$cont);
 				$instanceElementId = $dom->createElement('id-element');
-				$instanceElementIdTxt = $dom->createTextNode($value->ID);
+				$instanceElementIdTxt = $dom->createTextNode($value->id);
 				
 				$instanceElementName = $dom->createElement('name-element');
-				$instanceElementNameTxt = $dom->createTextNode($value->iDELEMENT->DESCRIPTION);
+				$instanceElementNameTxt = $dom->createTextNode($value->iDELEMENT->description);
 				
 				$instanceElementDesc = $dom->createElement('desc-instance');
-				$instanceElementDescTxt = $dom->createTextNode($value->DESCRIPTION);
+				$instanceElementDescTxt = $dom->createTextNode($value->description);
 
 				$instanceElementParams = $dom->createElement('params-instance');
 					$instanceElementType = $dom->createElement('type-instance');
-					$instanceElementTypeTxt = $dom->createTextNode($value->ELEMENT_TYPE);
+					$instanceElementTypeTxt = $dom->createTextNode($value->element_type);
 
 			$instanceElement->appendChild($instanceElementId);
 				$instanceElementId->appendChild($instanceElementIdTxt);
@@ -957,12 +949,12 @@ class TestContextController extends Controller
 			if($value->ELEMENT_TYPE=='interval'){
 				
 				$instanceElementStartParam = $dom->createElement('start-param');
-				$instanceElementStartParamTxt = $dom->createTextNode($value->START_PARAM);
+				$instanceElementStartParamTxt = $dom->createTextNode($value->start_param);
 				$instanceElementStartParam->appendChild($instanceElementStartParamTxt);
 				$instanceElementParams->appendChild($instanceElementStartParam);
 
 				$instanceElementEndParam = $dom->createElement('end-param');
-				$instanceElementEndParamTxt = $dom->createTextNode($value->END_PARAM);
+				$instanceElementEndParamTxt = $dom->createTextNode($value->end_param);
 				$instanceElementEndParam->appendChild($instanceElementEndParamTxt);
 				$instanceElementParams->appendChild($instanceElementEndParam);
 			}
@@ -1070,7 +1062,7 @@ class Helper{
 	}
 	
 	function getDescription($p, $p2){
-		return $this->vetores[$p]->el[$p2]->DESCRIPTION;
+		return $this->vetores[$p]->el[$p2]->description;
 	}
 	
 	function getObjectModel($p, $p2){

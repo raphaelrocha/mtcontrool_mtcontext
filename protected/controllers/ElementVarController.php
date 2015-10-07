@@ -62,45 +62,7 @@ class ElementVarController extends Controller
 	 * Creates a new model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
 	 */
-	/*public function actionCreate($idElement)
-	{
-		//$model=new ElementVar;
-
-		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
-		//$model->ID_ELEMENT=$idElement;
-
-		$arrayModels=ElementVar::model()->findAll('ID_ELEMENT=' . $idElement);
-		$model = new ElementVar;
-    	$model->ID_ELEMENT=$idElement;
-    	array_push($arrayModels, $model);
-
-		/*foreach($elementVars as $i=>$element)
-        {
-        	$model = new ElementVar;
-        	$model->ID_ELEMENT=$idElement;
-        	array_push($arrayModels, $model);
-        }*/
-
-/*		if (isset($_POST['buttonCancel'])) {
-			$_SESSION['model-element']=null;
-			$_SESSION['form-element']=null;
-			//$this->redirect(array('admin'/*,'id'=>$model->ID*///));
-/*			$this->redirect("/mtcontrool/index.php/element/admin");
-		}
-
-		if (isset($_POST['ElementVar'])) {
-			$model->attributes=$_POST['ElementVar'];
-			if ($model->save()) {
-				$this->redirect(array('view','id'=>$model->ID));
-			}
-		}
-
-		$this->render('create',array(
-			//'model'=>$model,
-			'arrayModels'=>$arrayModels,
-		));
-	}*/
+	
 
 	/**
 	 * Updates a particular model.
@@ -161,18 +123,10 @@ class ElementVarController extends Controller
 	 */
 	public function actionDelete($id,$idElement)
 	{
-		//if (Yii::app()->request->isPostRequest) {
-			// we only allow deletion via POST request
-			$this->loadModel($id)->delete();
-			$this->redirect("/mtcontrool/index.php/elementVar/update?idElement=".$idElement);
+	
+		$this->loadModel($id)->delete();
+		$this->redirect("/mtcontrool/index.php/elementVar/update?idElement=".$idElement);
 
-			// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-		//	if (!isset($_GET['ajax'])) {
-				//$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
-		//	}
-		//} else {
-		//	throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
-		//}
 	}
 
 	/**

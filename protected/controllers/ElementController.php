@@ -145,7 +145,7 @@ class ElementController extends Controller
 									
 
 									
-									$devicesArray[$value1->ID] = $value1->description;
+									$devicesArray[$value1->id] = $value1->description;
 									
 									array_push($devicesObjectsArray, $value1);
 								}
@@ -265,18 +265,12 @@ class ElementController extends Controller
 				$count=0;
 				$tempArray=array();
 				foreach ( $model->platforms as $platform ){
-					//echo $platform->id."<br/>" ;
-					//echo $platform->name."<br/>" ;
-					/*$device= Yii::app()->db->createCommand('SELECT *
-															  FROM Device
-															  WHERE ID_PLATFORM='.$platform->id)->query();*/
+					
 					
 					$device= Device::model()->findAllBySql('SELECT *
 															  FROM device
 															  WHERE id_platform='.$platform->id.' ORDER BY description');
-					//$data = CHtml::listData($device, 'ID', 'DESCRIPTION');
-					//var_dump($device);
-					//echo "<br/>";
+				
 					array_push($tempArray, $device);
 					$count++;
 					
@@ -285,18 +279,15 @@ class ElementController extends Controller
 				if($tempArray!=null){
 					if($tempArray[0]){
 						foreach ($tempArray as $value) {
-							//echo  $value->ID;
+							
 							if($value){
 								foreach ($value as $value1) {
-									//echo $value1->ID."<br/>";
-
-									//echo $value1->DESCRIPTION."<br/>";
-									$devicesArray[$value1->ID] = $value1->description;
-									//$devicesObjectsArray[$value1->ID] =$value1;
+																		
+									$devicesArray[$value1->id] = $value1->description;
+									
 									array_push($devicesObjectsArray, $value1);
 								}
-								//$devicesArray[$key] = $value;
-								
+																
 							}
 							
 						}
@@ -336,9 +327,9 @@ class ElementController extends Controller
 			// we only allow deletion via POST request
 
 
-			//if($this->loadModel($id)->delete()){
-				Yii::app()->db->createCommand("DELETE FROM element WHERE id={$id}")->execute();
-			//}
+			
+			Yii::app()->db->createCommand("DELETE FROM element WHERE id={$id}")->execute();
+			
 
 			// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 			if (!isset($_GET['ajax'])) {
@@ -490,34 +481,18 @@ class ElementController extends Controller
 		echo Yii::app()->user->getId()."<br/>";
 		echo Yii::app()->user->getName();
 
-		//$lista = Device::model()->findAll();
 		$lista = Device::model()->findAll('id_platform  = 3');
             
-            $lista = CHtml::listData($lista,'ID','description');
+        $lista = CHtml::listData($lista,'ID','description');
 
-            //var_dump($lista);
-            
-            echo CHtml::tag('option',array('value' => ''), 'Select', TRUE);
-            
-            foreach($lista as $valor => $name){
-                echo CHtml::tag('option',array('value'=>$valor),CHtml::encode($name),true);
-            }
+        //var_dump($lista);
+        
+        echo CHtml::tag('option',array('value' => ''), 'Select', TRUE);
+        
+        foreach($lista as $valor => $name){
+            echo CHtml::tag('option',array('value'=>$valor),CHtml::encode($name),true);
+        }
 
-		/*$testModel=Element::model()->findAll();
-
-
-		$cont=0;
-		foreach($testModel as $value ){
-
-			while( array_key_exists($cont, $value->elementPlatforms)){
-
-				echo $value->elementPlatforms[$cont]->iDPLATFORM->name;
-		 		echo "<br/>";
-		 		$cont++;
-			}
-		 
-		 $cont=0;
-		}*/
 	}
 
 

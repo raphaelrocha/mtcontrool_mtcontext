@@ -71,8 +71,8 @@ class ElementInstController extends Controller
 		$idDevice = Yii::app()->user->getState('idDevice');
 
 		$elements = new Element;
-        $elements=Element::model()->with('elementDevices')->findAll('ID_DEVICE=' . $idDevice);
-        $listElements = CHtml::listData($elements,'ID','DESCRIPTION');
+        $elements=Element::model()->with('elementDevices')->findAll('id_device=' . $idDevice);
+        $listElements = CHtml::listData($elements,'id','description');
         $arrayExcluded = array();
 
         $dataProvider=new CActiveDataProvider('Element');
@@ -154,9 +154,9 @@ class ElementInstController extends Controller
 		//FIQUEM AGRUPADDOS POR ELEMENTOS.
 		function order($a, $b)
 	    {
-	        $retval = strnatcmp($a['ID_ELEMENT'], $b['ID_ELEMENT']);
+	        $retval = strnatcmp($a['id_element'], $b['id_element']);
 	        if(!$retval)
-	            return strnatcmp($b['DESCRIPTION'], $a['DESCRIPTION']);
+	            return strnatcmp($b['description'], $a['description']);
 	        return $retval;
 	    }
 
@@ -165,7 +165,7 @@ class ElementInstController extends Controller
 		}
 
 		$arrayArrayModels=array();
-		$arrayModels=ElementInst::model()->findAll('ID_TEST_CONTEXT=' . $idTestContext,'ORDER BY ID_ELEMENT');
+		$arrayModels=ElementInst::model()->findAll('id_test_context=' . $idTestContext,'ORDER BY id_element');
 
 		//DELETA UMA JNSTANCIA JÁ SALVA
 		if (isset($_POST['del'])) {
@@ -180,15 +180,15 @@ class ElementInstController extends Controller
 		//ADICONA FORMS EM UM VETOR DE INSTANCIAS QUE NÃO POSSUI NENHUMA INSTANCIA CADASTRADA.
 		$anterior="";
 		foreach ($arrayModels as $item){
-			$item->sent = $item->BEHAVIOR_SCREEN;
-			if($item->iDELEMENT->DESCRIPTION!=$anterior){
-				$anterior = $item->iDELEMENT->DESCRIPTION;
+			$item->sent = $item->behavior_screen;
+			if($item->iDELEMENT->description!=$anterior){
+				$anterior = $item->iDELEMENT->description;
 				$i=0;
 				while ($i <= $TOTAL_FORMS) {
 					$newInstance = new ElementInst;
-					$newInstance->ID_ELEMENT = $item->ID_ELEMENT;
-					$newInstance->ID_TEST_CONTEXT = $item->ID_TEST_CONTEXT;
-					$newInstance->ELEMENT_TYPE = $item->ELEMENT_TYPE;
+					$newInstance->id_element = $item->id_element;
+					$newInstance->id_test_context = $item->id_test_context;
+					$newInstance->element_type = $item->element_type;
 					array_push($arrayModels,$newInstance);
 					$i++;
 				}
@@ -202,9 +202,9 @@ class ElementInstController extends Controller
 				$i=0;
 				while ($i <= $TOTAL_FORMS) {
 					$model = new ElementInst;
-		        	$model->ID_ELEMENT=$key;
-		        	$model->ID_TEST_CONTEXT=$idTestContext;
-		        	$model->ELEMENT_TYPE=$value;
+		        	$model->id_element=$key;
+		        	$model->id_test_context=$idTestContext;
+		        	$model->element_type=$value;
 		        	//if(!in_array($model,$arrayModels)){
 		        		array_push($arrayModels, $model);
 		        	//}
@@ -234,12 +234,12 @@ class ElementInstController extends Controller
 		$count_saved=0;
 		if($count_elements>0){
 			foreach($arrayModels as $key=>$model){
-				if(isset($_POST["DESCRIPTION".$key])){
-					if(trim($_POST["DESCRIPTION".$key])!=""){
-						$model->DESCRIPTION = $_POST["DESCRIPTION".$key];
-						if($model->ELEMENT_TYPE=="interval"){
-							$model->START_PARAM = $_POST["START_PARAM".$key];
-							$model->END_PARAM = $_POST["END_PARAM".$key];
+				if(isset($_POST["description".$key])){
+					if(trim($_POST["description".$key])!=""){
+						$model->description = $_POST["description".$key];
+						if($model->element_type=="interval"){
+							$model->start_param = $_POST["start_param".$key];
+							$model->end_param = $_POST["end_param".$key];
 						}
 						if($model->save()){
 							$count_saved++;
@@ -284,19 +284,19 @@ class ElementInstController extends Controller
 			$this->redirect("/mtcontrool/index.php/testContext/admin");
 		}
 
-		$arrayModels=ElementInst::model()->findAll('ID_TEST_CONTEXT=' . $idTestContext);
+		$arrayModels=ElementInst::model()->findAll('id_test_context=' . $idTestContext);
 		$arrayTypes = array();
 		foreach ($arrayModels as $item){
-			$item->sent = $item->BEHAVIOR_SCREEN;
-			$arrayTypes[$item->ID_ELEMENT] = $item->ELEMENT_TYPE;
+			$item->sent = $item->behavior_screen;
+			$arrayTypes[$item->id_element] = $item->element_type;
 		}
 
 		//FUNÇÃO CALLBACK DE ORDENAÇÃO.
 		function order($a, $b)
 	    {
-	        $retval = strnatcmp($a['ID_ELEMENT'], $b['ID_ELEMENT']);
+	        $retval = strnatcmp($a['id_element'], $b['id_element']);
 	        if(!$retval)
-	            return strnatcmp($b['DESCRIPTION'], $a['DESCRIPTION']);
+	            return strnatcmp($b['description'], $a['description']);
 	        return $retval;
 	    }
 
@@ -314,15 +314,15 @@ class ElementInstController extends Controller
 			foreach($elements as $i=>$element)
 	        {
 	        	$model = new ElementInst;
-	        	$model->ID_ELEMENT=$element->ID;
-	        	$model->ID_TEST_CONTEXT=$idTestContext;
+	        	$model->id_element=$element->id;
+	        	$model->id_test_context=$idTestContext;
 	        	foreach ($arrayTypes as $key=>$value){
-					if($model->ID_ELEMENT==$key){
-						$model->ELEMENT_TYPE=$value; 
+					if($model->id_element==$key){
+						$model->element_type=$value; 
 					}
 				}
 				if($model->ELEMENT_TYPE!=''){
-					array_push($arrayExclude,$element->ID);
+					array_push($arrayExclude,$element->id);
 				}else{
 					$flag=1;
 				}
@@ -344,7 +344,7 @@ class ElementInstController extends Controller
         	$exclude = json_decode($exclude);
 	        foreach ($elements as $key=>$item){
 	        	foreach($exclude as $value){
-	        		if($item->ID == $value){
+	        		if($item->id == $value){
 	        			array_push($arrayExcluded, $elements[$key]);
 	        			unset($elements[$key]);
 	        		}
@@ -353,7 +353,7 @@ class ElementInstController extends Controller
 	        $elements = array_values($elements);
         }
 
-        $listElements = CHtml::listData($elements,'ID','DESCRIPTION');
+        $listElements = CHtml::listData($elements,'id','description');
         $dataProvider=new CActiveDataProvider('Element');
         $dataProvider->setData($elements);
 
@@ -371,12 +371,12 @@ class ElementInstController extends Controller
 		$count_saved=0;
 		if($count_elements>0){
 			foreach($arrayModels as $key=>$model){
-				if(isset($_POST["DESCRIPTION".$key])){
-					if(trim($_POST["DESCRIPTION".$key])!=""){
-						$model->DESCRIPTION = $_POST["DESCRIPTION".$key];
-						if($model->ELEMENT_TYPE=="interval"){
-							$model->START_PARAM = $_POST["START_PARAM".$key];
-							$model->END_PARAM = $_POST["END_PARAM".$key];
+				if(isset($_POST["description".$key])){
+					if(trim($_POST["description".$key])!=""){
+						$model->description = $_POST["description".$key];
+						if($model->element_type=="interval"){
+							$model->start_param = $_POST["start_param".$key];
+							$model->end_param = $_POST["end_param".$key];
 						}
 						if($model->save()){
 							$count_saved++;
