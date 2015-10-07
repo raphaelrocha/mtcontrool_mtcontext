@@ -15,13 +15,13 @@ $this->breadcrumbs=array(
 $this->menu=array(
 	array('label'=>'List ElementVar', 'url'=>array('index')),
 	array('label'=>'Create ElementVar', 'url'=>array('create')),
-	array('label'=>'Update ElementVar', 'url'=>array('update', 'id'=>$model->ID)),
-	array('label'=>'Delete ElementVar', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->ID),'confirm'=>'Are you sure you want to delete this item?')),
+	array('label'=>'Update ElementVar', 'url'=>array('update', 'id'=>$model->id)),
+	array('label'=>'Delete ElementVar', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
 	array('label'=>'Manage ElementVar', 'url'=>array('admin')),
 );
 ?>
 
-<h1>View ElementVar #<?php echo $model->ID; ?></h1>
+<h1>View ElementVar #<?php echo $model->id; ?></h1>
 
 <?php $this->widget('zii.widgets.CDetailView',array(
     'htmlOptions' => array(
@@ -29,8 +29,8 @@ $this->menu=array(
     ),
     'data'=>$model,
     'attributes'=>array(
-		'ID',
-		'ID_ELEMENT',
-		'DESCRIPTION',
+		'id',
+		'id_element',
+		'description',
 	),
 )); ?>

@@ -35,14 +35,14 @@
             
             
             
-            <td><?php echo CHtml::link('add','#',array('submit'=>array('/elementVar/update?idElement='.$model->ID_ELEMENT))); ?></td>
+            <td><?php echo CHtml::link('add','#',array('submit'=>array('/elementVar/update?idElement='.$model->id_element))); ?></td>
             <!--<td><a href="javascript:{}" onclick="document.getElementById('element-var-form').submit(); return false;">add</a></td>-->
             
             <?php if($flag=='update'):?>
 
-                <?php if($model->DESCRIPTION!=''):?>
+                <?php if($model->description!=''):?>
                 <td>
-                    <b><?php echo CHtml::link('delete','#',array('submit'=>array('/elementVar/delete?id='.$model->ID.'&idElement='.$model->ID_ELEMENT),'confirm'=>'Are you sure to delete this?')); ?></b>
+                    <b><?php echo CHtml::link('delete','#',array('submit'=>array('/elementVar/delete?id='.$model->ID.'&idElement='.$model->id_element),'confirm'=>'Are you sure to delete this?')); ?></b>
                  </td>
 
                 <?php endif;?>

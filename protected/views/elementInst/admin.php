@@ -50,15 +50,12 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 	'dataProvider'=>$model->search(),
 	'filter'=>$model,
 	'columns'=>array(
-		'ID',
-		'ID_ELEMENT',
-		'ID_TEST_CONTEXT',
-		'ELEMENT_TYPE',
-		'DESCRIPTION',
-		'START_PARAM',
-		/*
-		'END_PARAM',
-		*/
+		'id',
+		'id_element',
+		'id_test_context',
+		'element_type',
+		'description',
+		'start_param',
 		array(
 			'class'=>'bootstrap.widgets.TbButtonColumn',
 		),
