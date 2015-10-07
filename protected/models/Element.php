@@ -75,7 +75,7 @@ class Element extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id' => 'ID',
+			'id' => 'Id',
 			'description' => 'Description',
 		);
 	}
