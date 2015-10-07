@@ -11,11 +11,11 @@
 	'method'=>'get',
 )); ?>
 
-                    <?php echo $form->textFieldControlGroup($model,'ID',array('span'=>5)); ?>
+                    <?php echo $form->textFieldControlGroup($model,'id',array('span'=>5)); ?>
 
-                    <?php echo $form->textFieldControlGroup($model,'ID_BRAND',array('span'=>5)); ?>
+                    <?php echo $form->textFieldControlGroup($model,'id_brand',array('span'=>5)); ?>
 
-                    <?php echo $form->textFieldControlGroup($model,'DESCRIPTION',array('span'=>5,'maxlength'=>50)); ?>
+                    <?php echo $form->textFieldControlGroup($model,'description',array('span'=>5,'maxlength'=>50)); ?>
 
         <div class="form-actions">
         <?php echo TbHtml::submitButton('Search',  array('color' => TbHtml::BUTTON_COLOR_PRIMARY,));?>

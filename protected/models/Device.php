@@ -31,12 +31,12 @@ class Device extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('ID_BRAND, DESCRIPTION, ID_PLATFORM', 'required'),
-			array('ID_BRAND', 'numerical', 'integerOnly'=>true),
-			array('DESCRIPTION', 'length', 'max'=>50),
-			// The following rule is used by search().
-			// @todo Please remove those attributes that should not be searched.
-			array('ID, ID_BRAND, DESCRIPTION, ID_PLATFORM, iDBRAND.BRAND_NAME, iDPLATFORM.name', 'safe', 'on'=>'search'),
+			array('id_brand, description, id_platform', 'required'),
+			array('id_brand', 'numerical', 'integeronly'=>true),
+			array('description', 'length', 'max'=>50),
+			// the following rule is used by search().
+			// @todo please remove those attributes that should not be searched.
+			array('id, id_brand, description, id_platform, idbrand.brand_name, idplatform.name', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -48,8 +48,8 @@ class Device extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'iDBRAND' => array(self::BELONGS_TO, 'Brand', 'ID_BRAND'),
-			'iDPLATFORM' => array(self::BELONGS_TO, 'Platforms', 'ID_PLATFORM'),
+			'iDBRAND' => array(self::BELONGS_TO, 'Brand', 'id_brand'),
+			'iDPLATFORM' => array(self::BELONGS_TO, 'Platforms', 'id_platform'),
 			//'DEVICE_BRAND_NAME' => array(self::BELONGS_TO, 'Brand', 'BRAND_NAME'),
 		);
 	}
@@ -62,10 +62,10 @@ class Device extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'ID' => 'ID',
-			'ID_BRAND' => 'Brand',
-			'ID_PLATFORM' => 'Platform',
-			'DESCRIPTION' => 'Model',
+			'id' => 'ID',
+			'id_brand' => 'Brand',
+			'id_platform' => 'Platform',
+			'description' => 'Model',
 		);
 	}
 
@@ -88,14 +88,14 @@ class Device extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 
-		$criteria->compare('ID',$this->ID);
-		//$criteria->compare('ID_BRAND',$this->ID_BRAND);
-		$criteria->compare('DESCRIPTION',$this->DESCRIPTION,true);
+		$criteria->compare('id',$this->id);
+		//$criteria->compare('id_brand',$this->id_brand);
+		$criteria->compare('description',$this->description,true);
 
 		$criteria->with=array('iDBRAND','iDPLATFORM');
 		//$criteria->with=array('iDBRAND');
-		$criteria->compare('iDPLATFORM.name',$this->ID_PLATFORM, true);
-		$criteria->compare('iDBRAND.BRAND_NAME',$this->ID_BRAND, true);
+		$criteria->compare('iDPLATFORM.name',$this->id_platform, true);
+		$criteria->compare('iDBRAND.BRAND_NAME',$this->id_brand, true);
 
 		
 		$criteria->together=true;

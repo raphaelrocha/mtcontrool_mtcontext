@@ -67,7 +67,7 @@ class DeviceController extends Controller
 		$model=new Device;
 
 		$modelsBrands= Brand::model()->findAll();
-		$brandsArray = CHtml::listData($modelsBrands, 'ID', 'BRAND_NAME');
+		$brandsArray = CHtml::listData($modelsBrands, 'id', 'brand_name');
 
 		$modelsPlatforms= Platforms::model()->findAll();
 		$platformsArray = CHtml::listData($modelsPlatforms, 'id', 'name');
@@ -83,9 +83,9 @@ class DeviceController extends Controller
 		if (isset($_POST['Device'])) {
 			$model->attributes=$_POST['Device'];
 			/*GARENTE QUE O NOME DO DEVICE SEMPRE SEJA SALVO EM MAIÚSCULO*/
-			$model->DESCRIPTION = strtoupper($model->DESCRIPTION);
+			$model->description = strtoupper($model->description);
 			if ($model->save()) {
-				$this->redirect(array('admin','id'=>$model->ID));
+				$this->redirect(array('admin','id'=>$model->id));
 			}
 		}
 
@@ -105,7 +105,7 @@ class DeviceController extends Controller
 	{
 		$model=$this->loadModel($id);
 		$modelsBrands= Brand::model()->findAll();
-		$brandsArray = CHtml::listData($modelsBrands, 'ID', 'BRAND_NAME');
+		$brandsArray = CHtml::listData($modelsBrands, 'id', 'brand_name');
 
 		$modelsPlatforms= Platforms::model()->findAll();
 		$platformsArray = CHtml::listData($modelsPlatforms, 'id', 'name');
@@ -114,15 +114,15 @@ class DeviceController extends Controller
 		// $this->performAjaxValidation($model);
 
 		if (isset($_POST['buttonCancel'])) {
-			$this->redirect(array('admin'/*,'id'=>$model->ID*/));
+			$this->redirect(array('admin'));
 		}
 
 		if (isset($_POST['Device'])) {
 			$model->attributes=$_POST['Device'];
 			/*GARENTE QUE O NOME DO DEVICE SEMPRE SEJA SALVO EM MAIÚSCULO*/
-			$model->DESCRIPTION = strtoupper($model->DESCRIPTION);
+			$model->DESCRIPTION = strtoupper($model->description);
 			if ($model->save()) {
-				$this->redirect(array('admin','id'=>$model->ID));
+				$this->redirect(array('admin','id'=>$model->id));
 			}
 		}
 

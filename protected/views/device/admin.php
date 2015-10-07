@@ -49,28 +49,28 @@
 	'dataProvider'=>$model->search(),
 	'filter'=>$model,
 	'columns'=>array(
-		//'ID',
-		//'ID_BRAND',
+		//'id',
+		//'id_brand',
 		array(
 			'header'=>'Model',
 			//'filter'=>Brand::model()->forList(),
-			'name'=>'DESCRIPTION',
-			//'value'=>'$data->iDBRAND->BRAND_NAME'
+			'name'=>'description',
+			//'value'=>'$data->iDBRAND->brand_name'
 		),
 		array(
 			'header'=>'Brand',
-			'filter'=>CHtml::listData(Brand::model()->findAll(),'BRAND_NAME', 'BRAND_NAME'),
-			'name'=>'ID_BRAND',
-			'value'=>'$data->iDBRAND->BRAND_NAME'
+			'filter'=>CHtml::listData(Brand::model()->findAll(),'brand_name', 'brand_name'),
+			'name'=>'id_brand',
+			'value'=>'$data->iDBRAND->brand_name'
 		),
 		array(
 			'header'=>'Platform',
 			'filter'=>CHtml::listData(Platforms::model()->findAll(),'name', 'name'),
-			'name'=>'ID_PLATFORM',
+			'name'=>'id_platform',
 			'value'=>'$data->iDPLATFORM->name'
 		),
 		
-		//'DESCRIPTION',
+		//'description',
 		array(
 			'class'=>'bootstrap.widgets.TbButtonColumn',
 			'template'=>'{update}&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{delete}',

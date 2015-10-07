@@ -33,10 +33,10 @@
 	    <p class="help-block">Fields with <span class="required">*</span> are required.</p>
     <?php echo $form->errorSummary($model); ?>
 
-            <?php echo $form->dropDownListControlGroup($model,'ID_BRAND',$brandsArray, array(/*'id'=>'BrandField',"disabled"=>"disabled",*/ 'empty' => '--- Choose a brand ---')); ?>
-            <?php echo $form->dropDownListControlGroup($model,'ID_PLATFORM',$platformsArray, array(/*'id'=>'BrandField',"disabled"=>"disabled",*/ 'empty' => '--- Choose a platform ---')); ?>
+            <?php echo $form->dropDownListControlGroup($model,'id_brand',$brandsArray, array('empty' => '--- Choose a brand ---')); ?>
+            <?php echo $form->dropDownListControlGroup($model,'id_platform',$platformsArray, array('empty' => '--- Choose a platform ---')); ?>
 
-            <?php echo $form->textFieldControlGroup($model,'DESCRIPTION',array('span'=>5,'maxlength'=>50)); ?>
+            <?php echo $form->textFieldControlGroup($model,'description',array('span'=>5,'maxlength'=>50)); ?>
 </div>
     
 	
