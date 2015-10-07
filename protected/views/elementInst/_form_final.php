@@ -148,13 +148,6 @@
         }
 
 
-        /*function isNumberKey(evt){
-            var charCode = (evt.which) ? evt.which : event.keyCode
-            //if (charCode > 31 && (charCode < 48 || charCode > 57))
-            if (charCode > 31 && (charCode != 46 &&(charCode < 48 || charCode > 57)))
-                return false;
-            return true;
-        }*/
     }
 
 </script>
@@ -497,8 +490,8 @@ div{
         <?php $listOpen=array(); ?>
         <?php foreach ($arrayModels as $key=>$model): ?>
             <input type="hidden" name="ElementInst<?= $acc_id ?>">
-            <?php $name = Element::model()->findByPK($model->ID_ELEMENT); ?>
-            <?php if($name->DESCRIPTION!=$anterior): ?>
+            <?php $name = Element::model()->findByPK($model->id_element); ?>
+            <?php if($name->description!=$anterior): ?>
                 <div class="labels">
                     <?php if ($key>0): ?>
                         <br>
@@ -506,7 +499,7 @@ div{
                     <?php endif;?>
 
                     <div class="label-name">
-                        <p class="labelCapiroto"><?php echo  $name->DESCRIPTION."  (".$model->ELEMENT_TYPE.")";?></p>
+                        <p class="labelCapiroto"><?php echo  $name->description."  (".$model->element_type.")";?></p>
                     </div>
                     <?php $open=0; ?>
                     
@@ -536,46 +529,29 @@ div{
                         <?php echo $form->errorSummary($model); ?>
 
                         <div class="description">
-                            <?php echo $form->textFieldControlGroup($model,"[$acc_id]DESCRIPTION",array('name'=>'DESCRIPTION'.$acc_id,'id'=>"description_field".$acc_id,'span'=>5,'size'=>2,'style'=>'width:250px;')); ?>
+                            <?php echo $form->textFieldControlGroup($model,"[$acc_id]description",array('name'=>'description'.$acc_id,'id'=>"description_field".$acc_id,'span'=>5,'size'=>2,'style'=>'width:250px;')); ?>
                         </div>
                         
-                        <?php if($model->ELEMENT_TYPE=="interval"): ?>
+                        <?php if($model->element_type=="interval"): ?>
                             <div class="start_param">
-                                <?php echo $form->textFieldControlGroup($model,"[$acc_id]START_PARAM",array('title'=>'Accepts only numbers and the following symbols: "-" and ".".
+                                <?php echo $form->textFieldControlGroup($model,"[$acc_id]start_param",array('title'=>'Accepts only numbers and the following symbols: "-" and ".".
 E.g.: 1.75 or -1.75',
-                                                                                                                        'class'=>'params',/*'onkeypress'=>'return event.charCode >= 48 && event.charCode <= 57',*/'name'=>'START_PARAM'.$acc_id,'id'=>"start_field".$acc_id,'size'=>2,'style'=>'width:100px;'/*,'span'=>5*/)); ?>
+                                                                                                                        'class'=>'params',/*'onkeypress'=>'return event.charCode >= 48 && event.charCode <= 57',*/'name'=>'start_param'.$acc_id,'id'=>"start_field".$acc_id,'size'=>2,'style'=>'width:100px;'/*,'span'=>5*/)); ?>
                                
                             </div>
                             <div class="end_param">
-                                <?php echo $form->textFieldControlGroup($model,"[$acc_id]END_PARAM",array('title'=>'Accepts only numbers and the following symbols: "-" and ".".
+                                <?php echo $form->textFieldControlGroup($model,"[$acc_id]end_param",array('title'=>'Accepts only numbers and the following symbols: "-" and ".".
 E.g.: 1.75 or -1.75',
-                                                                                                                    'class'=>'params','name'=>'END_PARAM'.$acc_id,'id'=>"end_field".$acc_id,'style'=>'width:100px;'/*,'size'=>2,'span'=>5*/)); ?>
+                                                                                                                    'class'=>'params','name'=>'end_param'.$acc_id,'id'=>"end_field".$acc_id,'style'=>'width:100px;'/*,'size'=>2,'span'=>5*/)); ?>
                             </div>
-                            <!--div class="info_ico">
-                                <i class="fa fa-info-circle"></i>
-                            </div>
-                            <div class="info_params">
-                                <p>The fields "Start" and "End" accepts only numbers and the following symbols: "-" and ".".</p>                            
-                            </div-->
+                            
 
                         <?php endif; ?>
-                        <!--div class="info_var_table">
-                            <div class="info_ico_var">
-                                <i class="fa fa-info-circle"></i>
-                            </div>
-                            <div class="info_var">
-                                <p><b>Variations:</b> It is the values that can be assigned to an element.
-                                    <br>
-                                    <b>E.g.:</b> Nominal Element: Connection - Variation "wi-fi";
-                                    <br>
-                                    <!--&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;->
-                                    Interval Element: Localization - Variation "nearby" Start 1 End 10</p>
-                            </div>
-                        </div-->
+                        
                         
 
                         <!--div class="delete"-->
-                            <?php if($model->DESCRIPTION!=''):?>
+                            <?php if($model->description!=''):?>
                             <div class="bt_delete">
                             <?php if($tag=="create"): ?>
                                 <?php 
@@ -585,7 +561,7 @@ E.g.: 1.75 or -1.75',
                                     'confirm'=>'Are you sure to delete this?',
                                     //'submit'=>array('/elementInst/delete?a='.$a.'&id='.$model->ID."&idTestContext=".$idTestContext."&idDevice=".$idDevice."&form=create"),
                                     'name' => 'del',
-                                    'value'=>$model->ID,
+                                    'value'=>$model->id,
                                     //'class'=>'btnDelete',
                                     'title'=>"Delete this instance",
                                     'color'=>TbHtml::BUTTON_COLOR_DANGER,
@@ -601,7 +577,7 @@ E.g.: 1.75 or -1.75',
                                     'confirm'=>'Are you sure to delete this?',
                                     //'submit'=>array('/elementInst/delete?id='.$model->ID."&idTestContext=".$idTestContext."&idDevice=".$idDevice."&form=update"),
                                     'name' => 'del',
-                                    'value'=>$model->ID,
+                                    'value'=>$model->id,
                                     //'class'=>'btnDelete',
                                     'title'=>"Delete this instance",
                                     'color'=>TbHtml::BUTTON_COLOR_DANGER,
@@ -648,7 +624,7 @@ E.g.: 1.75 or -1.75',
                         <?php endif;?> 
                         </div>
                         <?php echo $form->hiddenField($model,"[$acc_id]ELEMENT_TYPE",array('name'=>'ELEMENT_TYPE'.$acc_id,'id'=>"type_field".$acc_id,'disabled'=>'disabled','type'=>'hidden'/*,'span'=>5,'maxlength'=>10*/,'onchange'=>"Hab($key)",'style'=>'width:150px;')); ?>
-                                <?php $anterior = $name->DESCRIPTION  ?>
+                                <?php $anterior = $name->description  ?>
 
                         </div><!--accordion-inner-->
                     <!--/div--><!--accordion-body collaps-->
@@ -656,7 +632,7 @@ E.g.: 1.75 or -1.75',
                 </div>
             </div>
                 <!--|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||-->
-            <?php if($model->DESCRIPTION==""): ?>
+            <?php if($model->description==""): ?>
                 <?php if($open==0): ?>
                     <!--?php array_push($listOpen, $acc_id) ?-->
                     <script type="text/javascript">

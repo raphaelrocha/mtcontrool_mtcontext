@@ -11,19 +11,19 @@
 	'method'=>'get',
 )); ?>
 
-                    <?php echo $form->textFieldControlGroup($model,'ID',array('span'=>5)); ?>
+                    <?php echo $form->textFieldControlGroup($model,'id',array('span'=>5)); ?>
 
-                    <?php echo $form->textFieldControlGroup($model,'ID_ELEMENT',array('span'=>5)); ?>
+                    <?php echo $form->textFieldControlGroup($model,'id_element',array('span'=>5)); ?>
 
-                    <?php echo $form->textFieldControlGroup($model,'ID_TEST_CONTEXT',array('span'=>5)); ?>
+                    <?php echo $form->textFieldControlGroup($model,'id_test_context',array('span'=>5)); ?>
 
-                    <?php echo $form->textFieldControlGroup($model,'ELEMENT_TYPE',array('span'=>5,'maxlength'=>10)); ?>
+                    <?php echo $form->textFieldControlGroup($model,'element_type',array('span'=>5,'maxlength'=>10)); ?>
 
-                    <?php echo $form->textFieldControlGroup($model,'DESCRIPTION',array('span'=>5,'maxlength'=>50)); ?>
+                    <?php echo $form->textFieldControlGroup($model,'description',array('span'=>5,'maxlength'=>50)); ?>
 
-                    <?php echo $form->textFieldControlGroup($model,'START_PARAM',array('span'=>5)); ?>
+                    <?php echo $form->textFieldControlGroup($model,'start_param',array('span'=>5)); ?>
 
-                    <?php echo $form->textFieldControlGroup($model,'END_PARAM',array('span'=>5)); ?>
+                    <?php echo $form->textFieldControlGroup($model,'end_param',array('span'=>5)); ?>
 
         <div class="form-actions">
         <?php echo TbHtml::submitButton('Search',  array('color' => TbHtml::BUTTON_COLOR_PRIMARY,));?>

@@ -101,52 +101,7 @@
             document.getElementById("behavior_field["+i+"]").disabled=true;
             document.getElementById("behavior_scr_field["+i+"]").disabled=true;
         }
-        /*
-        //$(document).ready(function() {
-        //valida campos checkbox das bebidas 
-        var todos_inputs = document.getElementsByTagName('input');
-        var j=0;   
-        var oneLineSelected=0; 
-        document.getElementById("xmlbtn").disabled=true;
-        for (var i=0; i<=todos_inputs.length; i++){
-            if(document.getElementById("type_field["+i+"]").selectedIndex==false){
-                //document.getElementsByTagName('input').checked=false;
-                //document.getElementById("type_field["+i+"]").disabled=true;
-                document.getElementById("chk["+i+"]").checked=false;
-                //document.getElementById("type_field["+i+"]").disabled=true;
-                document.getElementById("description_field["+i+"]").disabled=true;
-                document.getElementById("start_field["+i+"]").disabled=true;
-                document.getElementById("end_field["+i+"]").disabled=true;
-                document.getElementById("behavior_field["+i+"]").disabled=true;
-                document.getElementById("behavior_scr_field["+i+"]").disabled=true;
-                //document.getElementById("addLink["+i+"]").disabled=true;
-                //document.getElementById("xmlbtn").disabled=true;
-            }
-            else if(document.getElementById("type_field["+i+"]").value=="nominal"){
-                //document.getElementsByTagName('input').checked=true;
-                //document.getElementById("type_field["+i+"]").disabled=true;
-                document.getElementById("chk["+i+"]").checked=true;
-                //document.getElementById("type_field["+i+"]").disabled=false;
-                document.getElementById("description_field["+i+"]").disabled=false;
-                document.getElementById("start_field["+i+"]").disabled=true;
-                document.getElementById("end_field["+i+"]").disabled=true;
-                document.getElementById("behavior_field["+i+"]").disabled=false;
-                document.getElementById("behavior_scr_field["+i+"]").disabled=false;
-                //document.getElementById("addLink["+i+"]").disabled=false;
 
-                oneLineSelected=1;
-                //document.getElementById("xmlbtn").disabled=false;
-            }else{
-                document.getElementById("chk["+i+"]").checked=true;
-                //document.getElementById("addLink["+i+"]").disabled=false;
-                oneLineSelected=1;
-                //document.getElementById("xmlbtn").disabled=false;
-            }
-            j=j+1;
-            if(oneLineSelected>0){
-                document.getElementById("xmlbtn").disabled=false;
-            }
-        }*/
     }
 
 </script>
@@ -327,9 +282,9 @@ hr.style-seven:before { /* Not really supposed to work, but does */
         $anterior="";
         $proximo=""?>
         <?php for($i=0;$i<$tamanho;$i++): ?>
-            <?php $name = Element::model()->findByPK($arrayModels[$i]->ID_ELEMENT); ?>
-            <?php if($name->DESCRIPTION!=$anterior): ?>
-                <p class="labelCapiroto"><?php echo  $name->DESCRIPTION."  (".$arrayModels[$i]->ELEMENT_TYPE.")";?></p>
+            <?php $name = Element::model()->findByPK($arrayModels[$i]->id_element); ?>
+            <?php if($name->description!=$anterior): ?>
+                <p class="labelCapiroto"><?php echo  $name->description."  (".$arrayModels[$i]->element_type.")";?></p>
 
                 <table class="table_do_capiroto">
             <?php endif; ?>
@@ -337,16 +292,16 @@ hr.style-seven:before { /* Not really supposed to work, but does */
                     
                     <tr>
                         <td>
-                            <?php echo $form->textFieldControlGroup($arrayModels[$i],"[$i]DESCRIPTION",array('id'=>"description_field[$i]",'span'=>5,'size'=>2,'style'=>'width:250px;')); ?>
+                            <?php echo $form->textFieldControlGroup($arrayModels[$i],"[$i]description",array('id'=>"description_field[$i]",'span'=>5,'size'=>2,'style'=>'width:250px;')); ?>
                         </td>
                         <td>
-                            <?php echo $form->textFieldControlGroup($arrayModels[$i],"[$i]BEHAVIOR",array('id'=>"behavior_field[$i]",'span'=>5,'maxlength'=>50,'style'=>'width:250px;')); ?>
+                            <?php echo $form->textFieldControlGroup($arrayModels[$i],"[$i]behavior",array('id'=>"behavior_field[$i]",'span'=>5,'maxlength'=>50,'style'=>'width:250px;')); ?>
                         </td>
                         <td>
-                            <?php echo $form->textFieldControlGroup($arrayModels[$i],"[$i]START_PARAM",array('id'=>"start_field[$i]",'size'=>2,'style'=>'width:100px;'/*,'span'=>5*/)); ?>
+                            <?php echo $form->textFieldControlGroup($arrayModels[$i],"[$i]start_param",array('id'=>"start_field[$i]",'size'=>2,'style'=>'width:100px;'/*,'span'=>5*/)); ?>
                         </td>
                         <td>
-                            <?php echo $form->textFieldControlGroup($arrayModels[$i],"[$i]END_PARAM",array('id'=>"end_field[$i]",'style'=>'width:100px;'/*,'size'=>2,'span'=>5*/)); ?>
+                            <?php echo $form->textFieldControlGroup($arrayModels[$i],"[$i]end_param",array('id'=>"end_field[$i]",'style'=>'width:100px;'/*,'size'=>2,'span'=>5*/)); ?>
                         </td>
                          <td rowspan="2" class="tdImageUp">
                                 <?php if($arrayModels[$i]->sent!=""): ?>
@@ -365,80 +320,20 @@ hr.style-seven:before { /* Not really supposed to work, but does */
                             'id'=>"btnInsert_$i",
                             'class'=>'btnInsert',
                             'title'=>"Save",
-                            //'class'=>'hvr-wobble-to-bottom-right',
-                            //'color'=>TbHtml::BUTTON_COLOR_SUCCESS,
-                            //'size'=>TbHtml::BUTTON_SIZE_SMALL,
                             )); ?>
                         </td>
                     </tr>
                     <tr>
                         <td class="btns">
-                            <!--<?php 
-                            echo TbHtml::submitButton($arrayModels[$i]->isNewRecord ? 'Insert' : 'Insert',array(
-                            'name' => 'add',
-                            'id'=>"btnInsert_$i",
-                            'color'=>TbHtml::BUTTON_COLOR_SUCCESS,
-                            'size'=>TbHtml::BUTTON_SIZE_SMALL,
-                            )); ?>
-                        
-                        <?php if($arrayModels[$i]->DESCRIPTION!=''):?>
-                            <?php if($tag=="create"): ?>
-                                <?php 
-                                    echo TbHtml::submitButton(
-                                    'Delete',array(
-                                    'id'=>"btnDelete_$i",
-                                    'confirm'=>'Are you sure to delete this?',
-                                    'submit'=>array('/elementInst/delete?a='.$a.'&id='.$arrayModels[$i]->ID."&idTestContext=".$idTestContext."&idDevice=".$idDevice."&form=create"),
-                                    'name' => 'del',
-                                    'color'=>TbHtml::BUTTON_COLOR_DANGER,
-                                    'size'=>TbHtml::BUTTON_SIZE_SMALL,
-                                    )); ?>
-                            <?php elseif($tag=="update"): ?>
-                                <?php 
-                                    echo TbHtml::submitButton(
-                                    'Delete',array(
-                                    'confirm'=>'Are you sure to delete this?',
-                                    'submit'=>array('/elementInst/delete?id='.$arrayModels[$i]->ID."&idTestContext=".$idTestContext."&idDevice=".$idDevice."&form=update"),
-                                    'name' => 'del',
-                                    'color'=>TbHtml::BUTTON_COLOR_DANGER,
-                                    'size'=>TbHtml::BUTTON_SIZE_SMALL,
-                                    )); ?>
-                            <?php endif;?>
-                                <?php 
-                                /*echo CHtml::ajaxLink('delete',
-                                Yii::app()->createUrl('/elementinst/delete?id='.$model->ID."&idTestContext=".$idTestContext."&idDevice=".$idDevice),
-                                array(
-                                    'type'=>'post',
-                                    'data' => array('id' =>$model->ID,'type'=>'delete'),
-                                    'update'=>'message',
-                                    'success' => 'function(response) {
-                                    $(".message").html(response);
-                                    $(".elementinst_'.$model->ID.'").remove();
-                                    }',
-                                    ),
-                                    array( 'confirm'=>'Are you sure to delete this question',)
-                                );*/
-                                ?>
                             
-                        <?php endif;?>
-                        -->
                         </td>
                         <td class="fileFild" colspan="3">
-                            <?php echo $form->hiddenField($arrayModels[$i],"[$i]ELEMENT_TYPE",array('id'=>"type_field[$i]",'disabled'=>'disabled','type'=>'hidden'/*,'span'=>5,'maxlength'=>10*/,'onchange'=>"Hab($i)",'style'=>'width:150px;')); ?>
-                                <?php $anterior = $name->DESCRIPTION  ?>
-                            <?php 
-                             /*echo $form->fileFieldControlGroup($arrayModels[$i],"[$i]BEHAVIOR_SCREEN",
-                                array('label'=>'',
-                                      'id'=>"behavior_scr_field[$i]",
-                                      'labelOptions'=>array('style'=>'display:inline'),
-                                      'span'=>5,
-                                      'maxlength'=>50,
-                                      'class'=>"btn btn-default btn-file"
-                                      ));*/
-                             ?>
+                            <?php echo $form->hiddenField($arrayModels[$i],"[$i]element_type",array('id'=>"type_field[$i]",'disabled'=>'disabled','type'=>'hidden'/*,'span'=>5,'maxlength'=>10*/,'onchange'=>"Hab($i)",'style'=>'width:150px;')); ?>
+                                <?php $anterior = $name->description  ?>
+                            
                         </td>
                         <td class="tdDelete">
-                           <?php if($arrayModels[$i]->DESCRIPTION!=''):?>
+                           <?php if($arrayModels[$i]->description!=''):?>
                             <?php if($tag=="create"): ?>
                                 <?php 
                                     echo TbHtml::submitButton(
@@ -449,8 +344,6 @@ hr.style-seven:before { /* Not really supposed to work, but does */
                                     'name' => 'del',
                                     'class'=>'btnDelete',
                                     'title'=>"Delete",
-                                    //'color'=>TbHtml::BUTTON_COLOR_DANGER,
-                                    //'size'=>TbHtml::BUTTON_SIZE_SMALL,
                                     )); ?>
                             <?php elseif($tag=="update"): ?>
                                 <?php 
@@ -458,36 +351,20 @@ hr.style-seven:before { /* Not really supposed to work, but does */
                                     '-',array(
                                     'id'=>"btnDelete_$i",
                                     'confirm'=>'Are you sure to delete this?',
-                                    'submit'=>array('/elementInst/delete?id='.$arrayModels[$i]->ID."&idTestContext=".$idTestContext."&idDevice=".$idDevice."&form=update"),
+                                    'submit'=>array('/elementInst/delete?id='.$arrayModels[$i]->id."&idTestContext=".$idTestContext."&idDevice=".$idDevice."&form=update"),
                                     'name' => 'del',
                                     'class'=>'btnDelete',
                                     'title'=>"Delete",
-                                    //'color'=>TbHtml::BUTTON_COLOR_DANGER,
-                                    //'size'=>TbHtml::BUTTON_SIZE_SMALL,
                                     )); ?>
                             <?php endif;?>
-                                <?php 
-                                /*echo CHtml::ajaxLink('delete',
-                                Yii::app()->createUrl('/elementinst/delete?id='.$model->ID."&idTestContext=".$idTestContext."&idDevice=".$idDevice),
-                                array(
-                                    'type'=>'post',
-                                    'data' => array('id' =>$model->ID,'type'=>'delete'),
-                                    'update'=>'message',
-                                    'success' => 'function(response) {
-                                    $(".message").html(response);
-                                    $(".elementinst_'.$model->ID.'").remove();
-                                    }',
-                                    ),
-                                    array( 'confirm'=>'Are you sure to delete this question',)
-                                );*/
-                                ?>
+                                
                             
                         <?php endif;?> 
                         </td>
                     </tr>
 
                     <?php if(isset($arrayModels[$i+1])): ?>
-                        <?php if($arrayModels[$i]->ID_ELEMENT==$arrayModels[$i+1]->ID_ELEMENT): ?>
+                        <?php if($arrayModels[$i]->id_element==$arrayModels[$i+1]->id_element): ?>
                             <tr class="trFinal">
                                 <td colspan="6">
                                     <hr class="style-fou">
@@ -503,7 +380,7 @@ hr.style-seven:before { /* Not really supposed to work, but does */
                     <?php endif; ?>
 
                 <?php if(isset($arrayModels[$i+1])): ?>
-                    <?php if($arrayModels[$i]->ID_ELEMENT!=$arrayModels[$i+1]->ID_ELEMENT): ?>  
+                    <?php if($arrayModels[$i]->id_element!=$arrayModels[$i+1]->id_element): ?>  
                         </table>
                         <br>
                     <?php endif; ?>

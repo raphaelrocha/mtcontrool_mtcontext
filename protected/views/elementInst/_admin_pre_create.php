@@ -131,31 +131,6 @@ td{
         
 </div>
 
-<?php 
-	/*$this->widget('bootstrap.widgets.TbGridView', array(
-	'dataProvider'=>$dataProvider,
-	'selectableRows' => 100,
-	'columns' => array(
-		
-		array(
-			'id' => 'selectedIds',
-			'class' => 'CCheckBoxColumn',
-			'value'=>'$row.";".$data->ID'
-		),
-
-		'DESCRIPTION',
-		array('type'=>'raw',
-            'name'=>'Type',
-            'value'=> ' CHtml::dropDownList(\'someName\'.$row,$data->DESCRIPTION,
-             array(
-             	\'empty\'=>\'---- Choose ----\',
-             	\'interval\'=>\'Interval\',
-                \'nominal\'=>\'Nominal\',)
-              )',  
-     	),
-	),
-));*/
-?>
 
 
 <p class="help-block">Select at least one element and its type.</p>
@@ -179,7 +154,7 @@ td{
 				<td class="td3">
 					<div>
 						<?php echo TbHtml::CheckBox("ID_$i",'#', 
-									array('class'=>'class="with-font','label' => $model->DESCRIPTION,'id'=>"chk_$i","value"=>$model->ID,'onchange'=>"set($i)")); ?>
+									array('class'=>'class="with-font','label' => $model->description,'id'=>"chk_$i","value"=>$model->id,'onchange'=>"set($i)")); ?>
 					</div>
 				</td>
 				<td class="td4">
@@ -231,21 +206,21 @@ td{
 				<tr>
 					<td class="td7">
 						<div>
-							<?php echo $value->DESCRIPTION; ?>
+							<?php echo $value->description; ?>
 						</div>
 					</td>
 					<td class="td8">
 						<?php 
-						$sql='select ELEMENT_TYPE from 
+						$sql='select element_type from 
 									element_inst join element on (element_inst.id_element = element.id)
-									where element_inst.ID_TEST_CONTEXT = '.$idTestContext.'
-									 AND element_inst.ID_ELEMENT = '.$value->ID.'
-									GROUP BY ELEMENT_TYPE;';
+									where element_inst.id_test_context = '.$idTestContext.'
+									 AND element_inst.id_element = '.$value->id.'
+									GROUP BY element_type;';
 						$connection=Yii::app()->db; 
 						$command=$connection->createCommand($sql);
 						$query=$command->query(); 
 						foreach($query as $item){
-						    echo $item['ELEMENT_TYPE'];
+						    echo $item['element_type'];
 						}
 						?>
 					</td>
