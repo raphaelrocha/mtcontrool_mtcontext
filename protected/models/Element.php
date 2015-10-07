@@ -36,11 +36,11 @@ class Element extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('DESCRIPTION', 'required'),
-			array('DESCRIPTION', 'length', 'max'=>50),
-			// The following rule is used by search().
-			// @todo Please remove those attributes that should not be searched.
-			array('ID, DESCRIPTION, elementPlatforms.ID_PLATFORM, elementDevices.ID_DEVICE, ID_PLAT, ID_DEV', 'safe', 'on'=>'search'),
+			array('description', 'required'),
+			array('description', 'length', 'max'=>50),
+			// the following rule is used by search().
+			// @todo please remove those attributes that should not be searched.
+			array('id, description, elementplatforms.id_platform, elementdevices.id_device, id_plat, id_dev', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -52,13 +52,13 @@ class Element extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			//'elementInsts' => array(self::HAS_MANY, 'ElementInst', 'ID_ELEMENT'),
-			'elementInst' => array(self::HAS_MANY, 'ElementInst', 'ID_ELEMENT'),
-			'elementPlatforms' => array(self::HAS_MANY, 'ElementPlatform', 'ID_ELEMENT'),
-			'elementDevices' => array(self::HAS_MANY, 'ElementDevice', 'ID_ELEMENT'),
-			'testContexts' => array(self::HAS_MANY, 'TestContext', 'ID_ELEMENT'),
-			'platforms' => array(self::MANY_MANY, 'Platforms', 'element_platform(ID_ELEMENT, ID_PLATFORM)'),
-			'devices' => array(self::MANY_MANY, 'Device', 'element_device(ID_ELEMENT, ID_DEVICE)'),
+			//'elementInsts' => array(self::HAS_MANY, 'ElementInst', 'id_element'),
+			'elementInst' => array(self::HAS_MANY, 'ElementInst', 'id_element'),
+			'elementPlatforms' => array(self::HAS_MANY, 'ElementPlatform', 'id_element'),
+			'elementDevices' => array(self::HAS_MANY, 'ElementDevice', 'id_elemenT'),
+			'testContexts' => array(self::HAS_MANY, 'TestContext', 'id_element'),
+			'platforms' => array(self::MANY_MANY, 'Platforms', 'element_platform(id_element, id_platform)'),
+			'devices' => array(self::MANY_MANY, 'Device', 'element_device(id_element, id_device)'),
 
 		);
 	}
@@ -116,9 +116,9 @@ class Element extends CActiveRecord
 
 			while( array_key_exists($cont, $value->elementDevices)){
 				if($return==''){
-					$return =  $value->elementDevices[$cont]->iDDEVICE->DESCRIPTION;
+					$return =  $value->elementDevices[$cont]->iDDEVICE->description;
 				}else{
-					$return =  $return." / ".$value->elementDevices[$cont]->iDDEVICE->DESCRIPTION;
+					$return =  $return." / ".$value->elementDevices[$cont]->iDDEVICE->description;
 				}
 				
 		 		$cont++;
@@ -147,14 +147,14 @@ class Element extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('ID',$this->ID);
-		$criteria->compare('DESCRIPTION',$this->DESCRIPTION,true);
-		$criteria->order = 'DESCRIPTION ASC';
+		$criteria->compare('ID',$this->id);
+		$criteria->compare('description',$this->description,true);
+		$criteria->order = 'description asc';
 
 		$criteria->with=array('elementPlatforms','elementDevices');
 		//$criteria->with=array('elementPlatforms');
-		$criteria->compare('elementPlatforms.ID_PLATFORM',$this->ID_PLAT, true);
-		$criteria->compare('elementDevices.ID_DEVICE',$this->ID_DEV, true);
+		$criteria->compare('elementPlatforms.id_platform',$this->ID_PLAT, true);
+		$criteria->compare('elementDevices.id_device',$this->ID_DEV, true);
 		$criteria->together=true;
 
 
