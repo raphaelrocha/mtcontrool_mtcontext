@@ -111,7 +111,7 @@ class ElementController extends Controller
 				if ($model->save()) {
 					//$this->redirect(array('admin'/*,'id'=>$model->ID*/));
 					//$this->redirect("/mtcontrool/index.php/elementVar/update?idElement=".$model->ID);
-					$this->redirect('/mtcontrool/index.php/Element/admin');
+					$this->redirect('/mtcontrool/index.php/element/admin');
 				}
 			}
 
@@ -352,7 +352,7 @@ class ElementController extends Controller
 
 
 			//if($this->loadModel($id)->delete()){
-				Yii::app()->db->createCommand("DELETE FROM ELEMENT WHERE ID={$id}")->execute();
+				Yii::app()->db->createCommand("DELETE FROM element WHERE id={$id}")->execute();
 			//}
 
 			// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
