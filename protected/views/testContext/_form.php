@@ -123,7 +123,7 @@
             <?php 
             
             echo $form->dropDownListControlGroup($model,
-                                      'ID_PLATFORM',
+                                      'id_platform',
                                       $platformsArray,
                                       array('id'=>'dd1','empty'=>'--- Choose a platform ---'/*,'onchange'=>'Hab2()'*/,
                                         'ajax'=>array(
