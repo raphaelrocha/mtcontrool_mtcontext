@@ -92,18 +92,18 @@
 			//var_dump($model->platforms);
 			foreach ( $model->devices as $device )
 
-			array_push ($selected_devices, $device->ID);
+			array_push ($selected_devices, $device->id);
 			?>
 	<div class="well">
 	    <div class="checkboxes">
 		    <?php $anterior="";?>
 		    <?php $count=0; ?>
 		    <?php foreach ($devicesObjectsArray as $key => $modelDevice):?>
-		    	<?php if($modelDevice->ID_PLATFORM != $anterior): ?>
-		    		<div class="table_list_devices" id="table_list_devices<?= $modelDevice->ID_PLATFORM; ?>">
+		    	<?php if($modelDevice->id_platform != $anterior): ?>
+		    		<div class="table_list_devices" id="table_list_devices<?= $modelDevice->id_platform; ?>">
 
-			    		<?php $anterior = $modelDevice->ID_PLATFORM?>
-			    		<?php $nomePlataforma = Platforms::model ()->findByPk ($modelDevice->ID_PLATFORM); ?>
+			    		<?php $anterior = $modelDevice->id_platform?>
+			    		<?php $nomePlataforma = Platforms::model ()->findByPk ($modelDevice->id_platform); ?>
 			    		<div class="platform_logo">
 			    			<?php echo CHtml::image(Yii::app()->request->baseUrl."/fotos/".$nomePlataforma->image."","kd",array( 'width'=>'40px','height'=>'40px', 'align'=>'center')); ?> 
 			    		</div>
@@ -116,17 +116,17 @@
 		    		<br>
 		    	<?php endif; ?>
 		    	<!--AQUI VÃOS OS CHECKBOX-->
-		    		<?php if(in_array($modelDevice->ID,$selected_devices)): ?>
-		    			<?php echo $form->checkBox($modelDevice,"[$count]selected", array('checked'=>'checked', 'name'=>$modelDevice->ID)); ?>
+		    		<?php if(in_array($modelDevice->id,$selected_devices)): ?>
+		    			<?php echo $form->checkBox($modelDevice,"[$count]selected", array('checked'=>'checked', 'name'=>$modelDevice->id)); ?>
 		    		<?php else: ?>
-		    			<?php echo $form->checkBox($modelDevice,"[$count]selected", array('name'=>$modelDevice->ID) ); ?>
+		    			<?php echo $form->checkBox($modelDevice,"[$count]selected", array('name'=>$modelDevice->id) ); ?>
 		    		<?php endif; ?>
 		    		
-		    		<?php echo $modelDevice->DESCRIPTION; ?>
+		    		<?php echo $modelDevice->description; ?>
 		    	<!--AQUI VÃOS OS CHECKBOX FIM -->
 		    	<br>
 		    	<?php if(isset($devicesObjectsArray[$key+1])): ?>
-		    		<?php if($devicesObjectsArray[$key+1]->ID_PLATFORM != $modelDevice->ID_PLATFORM): ?>
+		    		<?php if($devicesObjectsArray[$key+1]->id_platform != $modelDevice->id_platform): ?>
 		    		</div><!--fim div table_list_devices-->
 		    		<?php endif; ?>
 		    	<?php else: ?>
@@ -138,38 +138,9 @@
     </div>
 
 
-			
-
-
-			
-			
-			<div>
-				<?php //echo TbHtml::label($model->getAttributeLabel('devices'),'Device'); ?>
-				
-				<div class="portlet-content" id="divprincipal">
-				<!--?php echo TbHtml::CheckBoxList('Devices',/*'',$devicesArray,*/
-												$selected_devices , 
-												$devicesArray,
-												//CHtml::listData(Device::model()->findAll(),'ID','DESCRIPTION'),
-												
-												array('template'=>'{input} {label}')
-												); ?-->
-				<!--?php echo $form->error($model,'device'); ?-->
-				</div>
-			</div>
     </br>
 
 
-
-
-	<?php //echo $form->dropDownListControlGroup($model,'ID_PLATFORM',$platformsArray, array('span'=>5, 'empty' => '--- Escolha uma plataforma ---')); ?>
-
-
-            
-
-        
-    
-	
 
     <?php $this->endWidget(); ?>
 

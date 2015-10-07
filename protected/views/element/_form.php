@@ -41,11 +41,6 @@
 
     </script>
 
-
-
-
-
-	
 <div class="form">
 
     <?php $form=$this->beginWidget('bootstrap.widgets.TbActiveForm', array(
@@ -77,8 +72,8 @@
 
     <div class="well">
     	<p class="help-block">Fields with <span class="required">*</span> are required.</p>
-            <?php //echo $form->textFieldControlGroup($model,'ID_PLATFORM',array('span'=>5)); ?>
-            <?php echo $form->textFieldControlGroup($model,'DESCRIPTION',array('span'=>5,'maxlength'=>50)); ?>
+            
+            <?php echo $form->textFieldControlGroup($model,'description',array('span'=>5,'maxlength'=>50)); ?>
 
             
             <?php
@@ -107,45 +102,7 @@
 			</div>
 
 
-
-			<!--
-			<?php
-            //array que ir� receber as plataformas selecionadas
-			$selected_devices = array ();
-			//para cada plataforma, insere os id_plataforma escolhidos no array
-			//var_dump($model->platforms);
-			foreach ( $model->devices as $device )
-
-			array_push ($selected_devices, $device->ID);
-			?>
-			
-			
-			<br/><br/>
-			<div>
-				<?php echo TbHtml::label($model->getAttributeLabel('devices'),'Device'); ?>
-				
-				<div class="portlet-content" id="divprincipal">
-				<?php echo TbHtml::CheckBoxList('Devices',/*'',$devicesArray,*/
-												$selected_devices , 
-												CHtml::listData(Device::model()->findAll(),'ID','DESCRIPTION'),
-												array('template'=>'{input} {label}')
-												); ?>
-				<?php echo $form->error($model,'device'); ?>
-				</div>
-			</div>
-			-->
-
     </br>
-
-  
-	<?php //echo $form->dropDownListControlGroup($model,'ID_PLATFORM',$platformsArray, array('span'=>5, 'empty' => '--- Escolha uma plataforma ---')); ?>
-
-
-            
-
-        
-    
-	
 
 
 	</div>

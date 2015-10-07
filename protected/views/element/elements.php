@@ -37,14 +37,9 @@
 	'dataProvider'=>$model->search(),
 	'filter'=>$model,
 	'columns'=>array(
-		'ID',
-		'DESCRIPTION',
-		/*array(
-			'header'=>'Platforms',
-			'filter'=>CHtml::listData(PLATFORMS::model()->findAll(),'id', 'name'),
-			'name'=>'ID_PLAT',
-			'value'=>'$data->platform_list($data->ID)'
-		),*/
+		'id',
+		'description',
+		
 		
 		array(
 			'class'=>'bootstrap.widgets.TbButtonColumn',

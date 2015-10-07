@@ -33,38 +33,25 @@
         </div>
 
 
-<!--
-<?php if(Yii::app()->user->hasFlash('success')): ?>
-	<div class="flash-success" align="center">
-		<p class="soc-block"> <?php echo "Success."; ?></p>
-	</div>
-<?php elseif(Yii::app()->user->hasFlash('error')): ?>
-	<div class="flash-error" align="center">
-		<p class="soc-block"> <?php echo "Fail."; ?></p>
-	</div>
-<?php endif; ?>
-
-
-</div><!-- search-form -->
 
 <?php $this->widget('bootstrap.widgets.TbGridView',array(
 	'id'=>'element-grid',
 	'dataProvider'=>$model->search(),
 	'filter'=>$model,
 	'columns'=>array(
-		//'ID',
-		'DESCRIPTION',
+		//'id',
+		'description',
 		array(
 			'header'=>'Platforms',
 			'filter'=>CHtml::listData(Platforms::model()->findAll(),'id', 'name'),
-			'name'=>'ID_PLAT',
+			'name'=>'id_plat',
 			'value'=>'$data->platform_list($data->ID)'
 		),
 		array(
 			'header'=>'Devices',
-			'filter'=>CHtml::listData(Device::model()->findAll(),'ID', 'DESCRIPTION'),
-			'name'=>'ID_DEV',
-			'value'=>'$data->device_list($data->ID)'
+			'filter'=>CHtml::listData(Device::model()->findAll(),'ID', 'description'),
+			'name'=>'id_dev',
+			'value'=>'$data->device_list($data->id)'
 		),
 		
 		array(

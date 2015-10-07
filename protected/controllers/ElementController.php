@@ -69,15 +69,10 @@ class ElementController extends Controller
 		$modelsPlatforms= Platforms::model()->findAll();
 		$platformsArray = CHtml::listData($modelsPlatforms, 'id', 'name');
 
-		//$modelsDevices= Device::model()->findAll();
-		//$devicesArray = CHtml::listData($modelsDevices, 'ID', 'DESCRIPTION');
 
 		$devicesArray=array();
 		$devicesObjectsArray=array();
 
-		//$modelsPlatforms = Platforms::model()->findAllbySql('SELECT ID, NAME FROM PLATFORMS ORDER BY NAME');
-		//$platformsArray = CHtml::listData($modelsPlatforms, 'ID', 'NAME');
-		//var_dump($platformsArray);
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
@@ -105,12 +100,9 @@ class ElementController extends Controller
 				//break;
 				$model->setRelationRecords('devices',is_array(@$arrayIdDevices) ? $arrayIdDevices : array());
 				
-				//$model->setRelationRecords('devices',is_array(@$_POST['Devices']) ? $_POST['Devices'] : array());
 				/*GARENTE QUE O NOME DO ELEMENTO SEMPRE SEJA SALVO EM MAIÚSCULO*/
-				$model->DESCRIPTION = strtoupper($model->DESCRIPTION);
+				$model->description = strtoupper($model->description);
 				if ($model->save()) {
-					//$this->redirect(array('admin'/*,'id'=>$model->ID*/));
-					//$this->redirect("/mtcontrool/index.php/elementVar/update?idElement=".$model->ID);
 					$this->redirect('/mtcontrool/index.php/element/admin');
 				}
 			}
@@ -126,26 +118,19 @@ class ElementController extends Controller
 			if ($_SESSION['form-element'] == "p1") {
 				$_SESSION['form-element']=null;
 
-				//$selected_platforms = array ();
+				
 				//para cada plataforma, insere os id_plataforma escolhidos no array
-				//var_dump($model->platforms);
 				$tempArray = array();
 
 				$count=0;
 				$tempArray=array();
 				foreach ( $model->platforms as $platform ){
-					//echo $platform->id."<br/>" ;
-					//echo $platform->name."<br/>" ;
-					/*$device= Yii::app()->db->createCommand('SELECT *
-															  FROM Device
-															  WHERE ID_PLATFORM='.$platform->id)->query();*/
+					
 					
 					$device= Device::model()->findAllBySql('SELECT *
-															  FROM Device
-															  WHERE ID_PLATFORM='.$platform->id.' ORDER BY DESCRIPTION');
-					//$data = CHtml::listData($device, 'ID', 'DESCRIPTION');
-					//var_dump($device);
-					//echo "<br/>";
+															  FROM device
+															  WHERE id_platform='.$platform->id.' ORDER BY description');
+					
 					array_push($tempArray, $device);
 					$count++;
 					
@@ -154,14 +139,14 @@ class ElementController extends Controller
 				if($tempArray!=null){
 					if($tempArray[0]){
 						foreach ($tempArray as $value) {
-							//echo  $value->ID;
+							
 							if($value){
 								foreach ($value as $value1) {
-									//echo $value1->ID."<br/>";
+									
 
-									//echo $value1->DESCRIPTION."<br/>";
-									$devicesArray[$value1->ID] = $value1->DESCRIPTION;
-									//$devicesObjectsArray[$value1->ID] =$value1;
+									
+									$devicesArray[$value1->ID] = $value1->description;
+									
 									array_push($devicesObjectsArray, $value1);
 								}
 								//$devicesArray[$key] = $value;
@@ -251,7 +236,7 @@ class ElementController extends Controller
 				$model->setRelationRecords('devices',is_array(@$arrayIdDevices) ? $arrayIdDevices : array());
 				//$model->setRelationRecords('devices',is_array(@$_POST['Devices']) ? $_POST['Devices'] : array());
 				/*GARENTE QUE O NOME DO ELEMENTO SEMPRE SEJA SALVO EM MAIÚSCULO*/
-				$model->DESCRIPTION = strtoupper($model->DESCRIPTION);
+				$model->description = strtoupper($model->description);
 				if ($model->save()) {
 					//$this->redirect(array('admin'/*,'id'=>$model->ID*/));
 					//$this->redirect("/mtcontrool/index.php/elementVar/update?idElement=".$model->ID);
@@ -287,8 +272,8 @@ class ElementController extends Controller
 															  WHERE ID_PLATFORM='.$platform->id)->query();*/
 					
 					$device= Device::model()->findAllBySql('SELECT *
-															  FROM Device
-															  WHERE ID_PLATFORM='.$platform->id.' ORDER BY DESCRIPTION');
+															  FROM device
+															  WHERE id_platform='.$platform->id.' ORDER BY description');
 					//$data = CHtml::listData($device, 'ID', 'DESCRIPTION');
 					//var_dump($device);
 					//echo "<br/>";
@@ -306,7 +291,7 @@ class ElementController extends Controller
 									//echo $value1->ID."<br/>";
 
 									//echo $value1->DESCRIPTION."<br/>";
-									$devicesArray[$value1->ID] = $value1->DESCRIPTION;
+									$devicesArray[$value1->ID] = $value1->description;
 									//$devicesObjectsArray[$value1->ID] =$value1;
 									array_push($devicesObjectsArray, $value1);
 								}
@@ -423,14 +408,14 @@ class ElementController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 		if (isset($_POST['buttonCancel'])) {
-			$this->redirect(array('admin'/*,'id'=>$model->ID*/));
+			$this->redirect(array('admin'));
 		}
 
 		if (isset($_POST['Element'])) {
 			$model->attributes=$_POST['Element'];
 			$model->setRelationRecords('platforms',is_array(@$_POST['Platforms']) ? $_POST['Platforms'] : array());
 			/*GARENTE QUE O NOME DO ELEMENTO SEMPRE SEJA SALVO EM MAIÚSCULO*/
-			$model->DESCRIPTION = strtoupper($model->DESCRIPTION);
+			$model->description = strtoupper($model->description);
 			if ($model->save()) {
 				$this->redirect(array('elements'/*,'id'=>$model->ID*/));
 			}
@@ -469,14 +454,12 @@ class ElementController extends Controller
 		foreach ( $model->platforms as $platform ){
 			echo $platform->id."<br/>" ;
 			echo $platform->name."<br/>" ;
-			/*$device= Yii::app()->db->createCommand('SELECT *
-													  FROM Device
-													  WHERE ID_PLATFORM='.$platform->id)->query();*/
+			
 			
 			$device= Device::model()->findAllBySql('SELECT *
 													  FROM Device
 													  WHERE ID_PLATFORM='.$platform->id);
-			//$data = CHtml::listData($device, 'ID', 'DESCRIPTION');
+			
 			var_dump($device);
 			echo "<br/>";
 			$devicesArray[$count] = $device;
@@ -488,7 +471,7 @@ class ElementController extends Controller
 		var_dump($devicesArray);
 			echo "<br/>";
 			foreach ( $devicesArray as $key => $value ){
-				echo $value[$key]->DESCRIPTION;
+				echo $value[$key]->description;
 				echo "<br/>";
 
 			}
@@ -508,9 +491,9 @@ class ElementController extends Controller
 		echo Yii::app()->user->getName();
 
 		//$lista = Device::model()->findAll();
-		$lista = Device::model()->findAll('ID_PLATFORM  = 3');
+		$lista = Device::model()->findAll('id_platform  = 3');
             
-            $lista = CHtml::listData($lista,'ID','DESCRIPTION');
+            $lista = CHtml::listData($lista,'ID','description');
 
             //var_dump($lista);
             
