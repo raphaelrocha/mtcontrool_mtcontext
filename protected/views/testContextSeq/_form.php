@@ -189,7 +189,7 @@ div{
                                 <div class="head">
                                     <input id="chk<?= $acc_id ?>" type="checkbox" class="with-font" name="chk<?= $acc_id ?>" />
                                     <label for="chk<?= $acc_id ?>" class="with-font">
-                                        Sequence <?php echo $model->SEQUENCE_ORDER;  ?>
+                                        Sequence <?php echo $model->sequence_order;  ?>
                                     </label>
                                 </div>
                                
@@ -215,8 +215,8 @@ div{
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td><?php echo $form->textArea($model,'VARIATION',array('class'=>'variation_field','readonly'=>'readonly',/*,'disabled'=>'disabled'*/'name'=>'variation'.$acc_id,'span'=>5,'maxlength'=>10000, 'rows' => 10)); ?></td>
-                                        <td><?php echo $form->textArea($model,'BEHAVIOR',array('name'=>'behavior'.$acc_id,'span'=>5,'maxlength'=>10000, 'rows' => 10)); ?></td>
+                                        <td><?php echo $form->textArea($model,'variation',array('class'=>'variation_field','readonly'=>'readonly','name'=>'variation'.$acc_id,'span'=>5,'maxlength'=>10000, 'rows' => 10)); ?></td>
+                                        <td><?php echo $form->textArea($model,'behavior',array('name'=>'behavior'.$acc_id,'span'=>5,'maxlength'=>10000, 'rows' => 10)); ?></td>
                                         <td><?php //echo $form->fileField($model,"[1]BEHAVIOR_SCREEN","");?>
                                         <!--span class="btn btn-default btn-file">
                                                 Browse <input type="file">
