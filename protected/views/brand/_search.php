@@ -11,9 +11,9 @@
 	'method'=>'get',
 )); ?>
 
-                    <?php echo $form->textFieldControlGroup($model,'ID',array('span'=>5)); ?>
+                    <?php echo $form->textFieldControlGroup($model,'id',array('span'=>5)); ?>
 
-                    <?php echo $form->textFieldControlGroup($model,'BRAND_NAME',array('span'=>5,'maxlength'=>50)); ?>
+                    <?php echo $form->textFieldControlGroup($model,'brand_name',array('span'=>5,'maxlength'=>50)); ?>
 
         <div class="form-actions">
         <?php echo TbHtml::submitButton('Search',  array('color' => TbHtml::BUTTON_COLOR_PRIMARY,));?>

@@ -77,8 +77,8 @@ class Brand extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('id',$this->ID);
-		$criteria->compare('brand_name',$this->BRAND_NAME,true);
+		$criteria->compare('id',$this->id);
+		$criteria->compare('brand_name',$this->brand_name,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

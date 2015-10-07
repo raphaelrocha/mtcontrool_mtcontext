@@ -43,7 +43,7 @@
 
     <?php echo $form->errorSummary($model); ?>
 
-            <?php echo $form->textFieldControlGroup($model,'BRAND_NAME',array('span'=>5,'maxlength'=>50)); ?>
+            <?php echo $form->textFieldControlGroup($model,'brand_name',array('span'=>5,'maxlength'=>50)); ?>
 
      
 	</div>
