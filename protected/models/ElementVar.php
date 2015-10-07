@@ -29,12 +29,12 @@ class ElementVar extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('ID_ELEMENT, DESCRIPTION', 'required'),
-			array('ID_ELEMENT', 'numerical', 'integerOnly'=>true),
-			array('DESCRIPTION', 'length', 'max'=>50),
-			// The following rule is used by search().
-			// @todo Please remove those attributes that should not be searched.
-			array('ID, ID_ELEMENT, DESCRIPTION', 'safe', 'on'=>'search'),
+			array('id_element, description', 'required'),
+			array('id_element', 'numerical', 'integeronly'=>true),
+			array('description', 'length', 'max'=>50),
+			// the following rule is used by search().
+			// @todo please remove those attributes that should not be searched.
+			array('id, id_element, description', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -46,7 +46,7 @@ class ElementVar extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'iDELEMENT' => array(self::BELONGS_TO, 'Element', 'ID_ELEMENT'),
+			'iDELEMENT' => array(self::BELONGS_TO, 'Element', 'id_element'),
 		);
 	}
 
@@ -56,9 +56,9 @@ class ElementVar extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'ID' => 'ID',
-			'ID_ELEMENT' => 'Id Element',
-			'DESCRIPTION' => 'Description',
+			'id' => 'ID',
+			'id_element' => 'Id Element',
+			'description' => 'Description',
 		);
 	}
 
@@ -80,9 +80,9 @@ class ElementVar extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('ID',$this->ID);
-		$criteria->compare('ID_ELEMENT',$this->ID_ELEMENT);
-		$criteria->compare('DESCRIPTION',$this->DESCRIPTION,true);
+		$criteria->compare('id',$this->id);
+		$criteria->compare('id_element',$this->id_element);
+		$criteria->compare('description',$this->description,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

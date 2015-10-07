@@ -29,11 +29,11 @@ class ElementDevice extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('ID_ELEMENT, ID_DEVICE', 'required'),
-			array('ID_ELEMENT, ID_DEVICE', 'numerical', 'integerOnly'=>true),
+			array('id_element, id_device', 'required'),
+			array('id_element, id_device', 'numerical', 'integerOnly'=>true),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('ID_ELEMENT, ID_DEVICE', 'safe', 'on'=>'search'),
+			array('id_element, id_device', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -45,8 +45,8 @@ class ElementDevice extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'iDELEMENT' => array(self::BELONGS_TO, 'Element', 'ID_ELEMENT'),
-			'iDDEVICE' => array(self::BELONGS_TO, 'Device', 'ID_DEVICE'),
+			'iDELEMENT' => array(self::BELONGS_TO, 'Element', 'id_element'),
+			'iDDEVICE' => array(self::BELONGS_TO, 'Device', 'id_device'),
 		);
 	}
 
@@ -79,8 +79,8 @@ class ElementDevice extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('ID_ELEMENT',$this->ID_ELEMENT);
-		$criteria->compare('ID_DEVICE',$this->ID_DEVICE);
+		$criteria->compare('id_element',$this->id_element);
+		$criteria->compare('id_device',$this->id_device);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

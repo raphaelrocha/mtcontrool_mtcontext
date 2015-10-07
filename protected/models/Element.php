@@ -55,7 +55,7 @@ class Element extends CActiveRecord
 			//'elementInsts' => array(self::HAS_MANY, 'ElementInst', 'id_element'),
 			'elementInst' => array(self::HAS_MANY, 'ElementInst', 'id_element'),
 			'elementPlatforms' => array(self::HAS_MANY, 'ElementPlatform', 'id_element'),
-			'elementDevices' => array(self::HAS_MANY, 'ElementDevice', 'id_elemenT'),
+			'elementDevices' => array(self::HAS_MANY, 'ElementDevice', 'id_element'),
 			'testContexts' => array(self::HAS_MANY, 'TestContext', 'id_element'),
 			'platforms' => array(self::MANY_MANY, 'Platforms', 'element_platform(id_element, id_platform)'),
 			'devices' => array(self::MANY_MANY, 'Device', 'element_device(id_element, id_device)'),

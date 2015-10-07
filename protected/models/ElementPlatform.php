@@ -29,11 +29,11 @@ class ElementPlatform extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('ID_ELEMENT, ID_PLATFORM', 'required'),
-			array('ID_ELEMENT, ID_PLATFORM', 'numerical', 'integerOnly'=>true),
-			// The following rule is used by search().
-			// @todo Please remove those attributes that should not be searched.
-			array('ID_ELEMENT, ID_PLATFORM', 'safe', 'on'=>'search'),
+			array('id_element, id_platform', 'required'),
+			array('id_element, id_platform', 'numerical', 'integeronly'=>true),
+			// the following rule is used by search().
+			// @todo please remove those attributes that should not be searched.
+			array('id_element, id_platform', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -45,8 +45,8 @@ class ElementPlatform extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'iDELEMENT' => array(self::BELONGS_TO, 'Element', 'ID_ELEMENT'),
-			'iDPLATFORM' => array(self::BELONGS_TO, 'Platforms', 'ID_PLATFORM'),
+			'iDELEMENT' => array(self::BELONGS_TO, 'Element', 'id_element'),
+			'iDPLATFORM' => array(self::BELONGS_TO, 'Platforms', 'id_platform'),
 		);
 	}
 
@@ -56,8 +56,8 @@ class ElementPlatform extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'ID_ELEMENT' => 'Id Element',
-			'ID_PLATFORM' => 'Id Platform',
+			'id_element' => 'Id Element',
+			'id_platform' => 'Id Platform',
 		);
 	}
 
@@ -79,8 +79,8 @@ class ElementPlatform extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('ID_ELEMENT',$this->ID_ELEMENT);
-		$criteria->compare('ID_PLATFORM',$this->ID_PLATFORM);
+		$criteria->compare('id_element',$this->id_element);
+		$criteria->compare('id_platform',$this->id_platform);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

@@ -37,17 +37,17 @@ class ElementInst extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('ID_ELEMENT, ID_TEST_CONTEXT, ELEMENT_TYPE, DESCRIPTION', 'required'),
-			array('ID_ELEMENT, ID_TEST_CONTEXT', 'numerical', 'integerOnly'=>true),
-			//array('START_PARAM, END_PARAM', 'numerical', 'integerOnly'=>true),
-			array('ELEMENT_TYPE', 'length', 'max'=>10),
-			array('DESCRIPTION', 'length', 'max'=>50),
-			array('BEHAVIOR', 'length', 'max'=>50),
+			array('id_element, id_test_context, element_type, description', 'required'),
+			array('id_element, id_test_context', 'numerical', 'integeronly'=>true),
+			//array('start_param, end_param', 'numerical', 'integeronly'=>true),
+			array('element_type', 'length', 'max'=>10),
+			array('description', 'length', 'max'=>50),
+			array('behavior', 'length', 'max'=>50),
 			array('sent', 'length', 'max'=>500),
-			array('BEHAVIOR_SCREEN', 'file', 'types' => 'jpg, png, jpeg, pdf', 'allowEmpty'=>true),
-			// The following rule is used by search().
-			// @todo Please remove those attributes that should not be searched.
-			array('ID, ID_ELEMENT, sent, ID_TEST_CONTEXT, ELEMENT_TYPE, BEHAVIOR, BEHAVIOR_SCREEN, DESCRIPTION, START_PARAM, END_PARAM', 'safe', 'on'=>'search'),
+			array('behavior_screen', 'file', 'types' => 'jpg, png, jpeg, pdf', 'allowempty'=>true),
+			// the following rule is used by search().
+			// @todo please remove those attributes that should not be searched.
+			array('id, id_element, sent, id_test_context, element_type, behavior, behavior_screen, description, start_param, end_param', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -59,8 +59,8 @@ class ElementInst extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'iDELEMENT' => array(self::BELONGS_TO, 'Element', 'ID_ELEMENT'),
-			'iDTESTCONTEXT' => array(self::BELONGS_TO, 'TestContext', 'ID_TEST_CONTEXT'),
+			'iDELEMENT' => array(self::BELONGS_TO, 'Element', 'id_element'),
+			'iDTESTCONTEXT' => array(self::BELONGS_TO, 'TestContext', 'id_test_context'),
 		);
 	}
 
@@ -70,16 +70,16 @@ class ElementInst extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'ID' => 'ID',
-			'ID_ELEMENT' => 'Id Element',
-			'ID_TEST_CONTEXT' => 'Id Test Context',
-			'ELEMENT_TYPE' => 'Type',
-			'DESCRIPTION' => 'Variation',
-			'BEHAVIOR' => 'Behavior',
-			'BEHAVIOR_SCREEN' => 'Screenshot',
+			'id' => 'ID',
+			'id_element' => 'Id Element',
+			'id_test_context' => 'Id Test Context',
+			'element_type' => 'Type',
+			'description' => 'Variation',
+			'behavior' => 'Behavior',
+			'behavior_screen' => 'Screenshot',
 			'upload' => 'Behavior Screenshot',
-			'START_PARAM' => 'Start',
-			'END_PARAM' => 'End',
+			'start_param' => 'Start',
+			'end_param' => 'End',
 		);
 	}
 
@@ -101,13 +101,13 @@ class ElementInst extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('ID',$this->ID);
-		$criteria->compare('ID_ELEMENT',$this->ID_ELEMENT);
-		$criteria->compare('ID_TEST_CONTEXT',$this->ID_TEST_CONTEXT);
-		$criteria->compare('ELEMENT_TYPE',$this->ELEMENT_TYPE,true);
-		$criteria->compare('DESCRIPTION',$this->DESCRIPTION,true);
-		$criteria->compare('START_PARAM',$this->START_PARAM);
-		$criteria->compare('END_PARAM',$this->END_PARAM);
+		$criteria->compare('id',$this->id);
+		$criteria->compare('id_element',$this->id_element);
+		$criteria->compare('id_test_context',$this->id_test_context);
+		$criteria->compare('element_type',$this->element_type,true);
+		$criteria->compare('description',$this->description,true);
+		$criteria->compare('start_param',$this->start_param);
+		$criteria->compare('end_param',$this->end_param);
 
 		return new CActiveDataProvider($this, array(
 			'pagination' => array(
