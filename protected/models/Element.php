@@ -75,14 +75,14 @@ class Element extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'ID' => 'ID',
-			'DESCRIPTION' => 'Description',
+			'id' => 'ID',
+			'description' => 'Description',
 		);
 	}
 
 	public function platform_list($id){
 
-		$testModel=$this->findAllBySql('SELECT * FROM ELEMENT WHERE ID ='.$id);
+		$testModel=$this->findAllBySql('SELECT * FROM element WHERE id ='.$id);
 
 
 		$cont=0;
@@ -106,7 +106,7 @@ class Element extends CActiveRecord
 	}
 
 	public function device_list($id){
-		$testModel=$this->findAllBySql('SELECT * FROM ELEMENT WHERE ID ='.$id);
+		$testModel=$this->findAllBySql('SELECT * FROM element WHERE id ='.$id);
 
 
 		$cont=0;
@@ -147,7 +147,7 @@ class Element extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('ID',$this->id);
+		$criteria->compare('id',$this->id);
 		$criteria->compare('description',$this->description,true);
 		$criteria->order = 'description asc';
 
