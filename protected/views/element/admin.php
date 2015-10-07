@@ -16,17 +16,14 @@
 
 <div class="well-button">
 
-              <?php echo TbHtml::Button('<i class="fa fa-arrow-left"></i> Back', array('onclick' => 'js:document.location.href="/mtcontrool"',
-                      'id'=>'b1',
-                      'title'=>'Back',
-                    'color'=>TbHtml::BUTTON_COLOR_DEFAULT,
-		    'size'=>TbHtml::BUTTON_SIZE_SMALL,
-                   
-                  //  'htmlButton'=>'style'=>'color: red',
-                     'style'=>'color: green;',
-                  
-                
-              )  ); ?>
+<?php echo TbHtml::Button('<i class="fa fa-arrow-left"></i> Back', array('onclick' => 'js:document.location.href="/mtcontrool"',
+	'id'=>'b1',
+	'title'=>'Back',
+	'color'=>TbHtml::BUTTON_COLOR_DEFAULT,
+	'size'=>TbHtml::BUTTON_SIZE_SMALL,
+	'style'=>'color: green;',
+	));
+?>
             
              
                 
@@ -45,11 +42,11 @@
 			'header'=>'Platforms',
 			'filter'=>CHtml::listData(Platforms::model()->findAll(),'id', 'name'),
 			'name'=>'id_plat',
-			'value'=>'$data->platform_list($data->ID)'
+			'value'=>'$data->platform_list($data->id)'
 		),
 		array(
 			'header'=>'Devices',
-			'filter'=>CHtml::listData(Device::model()->findAll(),'ID', 'description'),
+			'filter'=>CHtml::listData(Device::model()->findAll(),'id', 'description'),
 			'name'=>'id_dev',
 			'value'=>'$data->device_list($data->id)'
 		),
