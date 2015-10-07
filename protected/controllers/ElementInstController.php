@@ -321,7 +321,7 @@ class ElementInstController extends Controller
 						$model->element_type=$value; 
 					}
 				}
-				if($model->ELEMENT_TYPE!=''){
+				if($model->element_type!=''){
 					array_push($arrayExclude,$element->id);
 				}else{
 					$flag=1;

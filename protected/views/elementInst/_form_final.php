@@ -602,13 +602,7 @@ E.g.: 1.75 or -1.75',
                                 </div>
                             </div>
                             <div class="add-field" id="add-field<?= $acc_id ?>">
-                                <!--?php echo TbHtml::submitButton("#" ? '<i class="fa fa-plus"></i>' : '<i class="fa fa-plus"></i>',array(
-                                    'name' => 'buttonSaveOnly',
-                                    'value'=>$model->ID_ELEMENT.";".$model->ELEMENT_TYPE.";".$key,
-                                    'color'=>TbHtml::BUTTON_COLOR_SUCCESS,
-                                    'size'=>TbHtml::BUTTON_SIZE_SMALL,
-                                    'title'=>"Add more element"
-                                    )); ?-->
+                                
                                 <?php echo TbHtml::Button('<i class="fa fa-plus"></i>',array(
                                     'name' => 'buttonAdd',
                                     'id'=>'buttonAdd'.$acc_id,
@@ -623,7 +617,7 @@ E.g.: 1.75 or -1.75',
                                 
                         <?php endif;?> 
                         </div>
-                        <?php echo $form->hiddenField($model,"[$acc_id]ELEMENT_TYPE",array('name'=>'ELEMENT_TYPE'.$acc_id,'id'=>"type_field".$acc_id,'disabled'=>'disabled','type'=>'hidden'/*,'span'=>5,'maxlength'=>10*/,'onchange'=>"Hab($key)",'style'=>'width:150px;')); ?>
+                        <?php echo $form->hiddenField($model,"[$acc_id]element_type",array('name'=>'element_type'.$acc_id,'id'=>"type_field".$acc_id,'disabled'=>'disabled','type'=>'hidden'/*,'span'=>5,'maxlength'=>10*/,'onchange'=>"Hab($key)",'style'=>'width:150px;')); ?>
                                 <?php $anterior = $name->description  ?>
 
                         </div><!--accordion-inner-->
