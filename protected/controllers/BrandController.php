@@ -70,7 +70,7 @@ class BrandController extends Controller
 		// $this->performAjaxValidation($model);
 
 		if (isset($_POST['buttonCancel'])) {
-			$this->redirect(array('admin'/*,'id'=>$model->ID*/));
+			$this->redirect(array('admin'));
 		}
 
 		if (isset($_POST['Brand'])) {
@@ -100,7 +100,7 @@ class BrandController extends Controller
 		// $this->performAjaxValidation($model);
 
 		if (isset($_POST['buttonCancel'])) {
-			$this->redirect(array('admin'/*,'id'=>$model->ID*/));
+			$this->redirect(array('admin'));
 		}
 
 
