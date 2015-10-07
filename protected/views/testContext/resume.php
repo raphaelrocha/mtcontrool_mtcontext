@@ -234,7 +234,7 @@ td{
                             <tr>
                                 <td class="line_number"><?php echo $count_var; ?></td>
                                 <td><?php echo $model->description ?></td>
-                                <!--td><?php echo $model->ELEMENT_TYPE ?></td-->
+                                
                                 <?php if($model->element_type=="interval"): ?>
                                     <td><?php echo $model->start_param ?></td>
                                     <td><?php echo $model->end_param ?></td>
