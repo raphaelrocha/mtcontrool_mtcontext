@@ -143,7 +143,7 @@ href="<?php echo Yii::app()->request->baseUrl; ?>/css/users.css" />
       'Runs' => array (
         'index' 
         ),
-      $model->ID 
+      $model->id 
       );
 
     $this->menu = array (
@@ -163,7 +163,7 @@ href="<?php echo Yii::app()->request->baseUrl; ?>/css/users.css" />
         'label' => 'Update Runs',
         'url' => array (
           'update',
-          'id' => $model->ID 
+          'id' => $model->id 
           ) 
         ),
       array (
@@ -172,7 +172,7 @@ href="<?php echo Yii::app()->request->baseUrl; ?>/css/users.css" />
         'linkOptions' => array (
           'submit' => array (
             'delete',
-            'id' => $model->ID 
+            'id' => $model->id 
             ),
           'confirm' => 'Are you sure you want to delete this item?' 
           ) 
@@ -228,18 +228,18 @@ href="<?php echo Yii::app()->request->baseUrl; ?>/css/users.css" />
             )  ); ?>
             
             <?php echo CHtml::link('<i class="fa fa-print"></i> Print ',"",
-                               array(
-                               'submit'=>array('/testContext/printMef'),
-                               'params'=>array(
-                                'method'=>'postDashboard',
-                               'json' => $json,
-                               'totalTests' => $totalTests,
-                               'totalElements' => $totalElements,
-                               'platform'=>$nomePlataforma,
-                               'device'=>$device->DESCRIPTION,
-                               'user'=>$user,
-                               'app'=>$nomeApp),
-                               'target'=>'_blank','id'=>'bt_print')); ?>
+                array(
+                'submit'=>array('/testContext/printMef'),
+                'params'=>array(
+                'method'=>'postDashboard',
+                'json' => $json,
+                'totalTests' => $totalTests,
+                'totalElements' => $totalElements,
+                'platform'=>$nomePlataforma,
+                'device'=>$device->description,
+                'user'=>$user,
+                'app'=>$nomeApp),
+                'target'=>'_blank','id'=>'bt_print')); ?>
 
 
             
@@ -277,10 +277,10 @@ href="<?php echo Yii::app()->request->baseUrl; ?>/css/users.css" />
                                           <div class="col-md-1 text-right">
                                              <div>
                                                   <H1><?php echo $totalElements; ?> <font size="6">Element(s)</font></H1>
-                                                <!--h1><?php //echo ($quantidadeFail)?> Failed</h1-->
+                                                
                                             </div>
                                             <div>
-                                                <!--p>Total Varied Elements</p-->
+                                                
                                             </div>
                                         </div>
                                     </div>
@@ -313,7 +313,7 @@ href="<?php echo Yii::app()->request->baseUrl; ?>/css/users.css" />
                                               <div class="col-md-1 text-right">
                                                  <div>
                                                   <?php echo CHtml::image(Yii::app()->request->baseUrl."/images/smart2.png"."","kd",array( 'width'=>'55px','height'=>'55px', 'align'=>'left')); ?> 
-                                                    <h1><?php echo $device->DESCRIPTION; ?>
+                                                    <h1><?php echo $device->description; ?>
                                                     </h1>
                                                 </div>
                                                 <div>
@@ -414,21 +414,18 @@ href="<?php echo Yii::app()->request->baseUrl; ?>/css/users.css" />
                                             <br>
                                             
                                             <div class="print_scr">
-                                              <?php //$imghtml=CHtml::image(Yii::app()->request->baseUrl."/upload_testcontext/".$value[3],"kd",array('class'=>'imagePreview', 'width'=>'200px','height'=>'200px', 'align'=>'center')); ?>
-                                              <?php  //echo CHtml::link($imghtml, array('target'=>'_blank')); ?>
-                                              <?php //echo CHtml::image(Yii::app()->request->baseUrl."/upload_testcontext/".$value[3],"kd",array('class'=>'imagePreview', 'width'=>'200px','height'=>'200px', 'align'=>'center')); ?> 
+                                            
                                               <?php echo CHtml::link(CHtml::image(Yii::app()->request->baseUrl."/upload_testcontext/".$value[3],"Screenshot",array('class'=>'imagePreview', 'width'=>'200px','height'=>'200px', 'align'=>'center')), Yii::app()->request->baseUrl."/upload_testcontext/".$value[3], array('title'=>'Download file.','target'=>'_blank')); ?>
                                             </div>
                                             <br>
-                                            <!--img class="img-responsive" src="/localhost/mtcontrool/upload_testcontext/185d4c9302424484b6ceb3083ebca963.png" alt="image" /-->
+                                            
                                           </p>
                                       </fieldset>
                                       
                                   </div>
                               </div>
                               <div class="modal-footer">
-                                  <?php //echo TbHtml::link('Pass', array('runs/passTestRun', 'id'=> $dp['IDTestRun']), array('class'=>'btn btn-success'));?>
-                                  <?php //echo TbHtml::link('Fail', array('runs/failTestRun', 'id'=> $dp['IDTestRun']),array('class'=>'btn btn-danger')); ?>
+                                 
                                   <?php echo TbHtml::button('Close', array('data-dismiss' => 'modal')); ?>
                               </div>
                           </div>

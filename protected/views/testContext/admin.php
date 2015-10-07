@@ -91,17 +91,13 @@ $('.search-form form').submit(function(){
 <br>
 <div class="well-button">
 
-              <?php echo TbHtml::Button('<i class="fa fa-arrow-left"></i> Back', array('onclick' => 'js:document.location.href="/mtcontrool"',
-                      'id'=>'b1',
-                      'title'=>'Back',
-                    'color'=>TbHtml::BUTTON_COLOR_DEFAULT,
-		    'size'=>TbHtml::BUTTON_SIZE_SMALL,
-                   
-                  //  'htmlButton'=>'style'=>'color: red',
-                     'style'=>'color: green;',
-                  
-                
-              )  ); ?>
+<?php echo TbHtml::Button('<i class="fa fa-arrow-left"></i> Back', array('onclick' => 'js:document.location.href="/mtcontrool"',
+	'id'=>'b1',
+	'title'=>'Back',
+	'color'=>TbHtml::BUTTON_COLOR_DEFAULT,
+	'size'=>TbHtml::BUTTON_SIZE_SMALL,
+	'style'=>'color: green;',
+)); ?>
             
         </div>
 <div class="group-div">
@@ -112,29 +108,29 @@ $('.search-form form').submit(function(){
 	'dataProvider'=>$model->search(),
 	'filter'=>$model,
 	'columns'=>array(
-		'DESCRIPTION',
+		'description',
 		array(
 			'header'=>'App',
 			'filter'=>CHtml::listData(App::model()->findAll(),'name', 'name'),
-			'name'=>'ID_APP',
+			'name'=>'id_app',
 			'value'=>'$data->iDAPP->name'
 		),
 		array(
 			'header'=>'Platform',
 			'filter'=>CHtml::listData(Platforms::model()->findAll(),'name', 'name'),
-			'name'=>'ID_PLATFORM',
+			'name'=>'id_platform',
 			'value'=>'$data->iDPLATFORM->name'
 		),
 		array(
 			'header'=>'Device',
-			'filter'=>CHtml::listData(Device::model()->findAll(),'DESCRIPTION', 'DESCRIPTION'),
-			'name'=>'ID_DEVICE',
-			'value'=>'$data->iDDEVICE->DESCRIPTION'
+			'filter'=>CHtml::listData(Device::model()->findAll(),'description', 'description'),
+			'name'=>'id_device',
+			'value'=>'$data->iDDEVICE->description'
 		),
 		array(
 			'header'=>'User',
 			'filter'=>CHtml::listData(Users::model()->findAll(),'name', 'name'),
-			'name'=>'ID_USER',
+			'name'=>'id_user',
 			'value'=>'$data->iDUSER->name'
 		),
 		array(
@@ -142,18 +138,14 @@ $('.search-form form').submit(function(){
 			'template'=>'{Resume}&nbsp&nbsp{delete}',
 			'buttons'=>array
 		    (
-		    	/*'update'=>array(
-                            'icon'=>'fa fa-pencil',
-                            ),*/
 		        'Resume' => array
 		        (
 		        	'icon'=>'icon-list',
-		            //'imageUrl'=>Yii::app()->request->baseUrl.'/images/rsz_1xml.png',
-		            'url'=>'Yii::app()->createUrl("testContext/resume", array("idTestContext"=>$data->ID))',
+		            'url'=>'Yii::app()->createUrl("testContext/resume", array("idTestContext"=>$data->id))',
 		        ),
 		        'delete'=>array(
-                               'icon'=>'fa fa-trash-o', 
-                            ),
+                   	'icon'=>'fa fa-trash-o', 
+                ),
 		    ),
 		),
 	),

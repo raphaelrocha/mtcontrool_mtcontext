@@ -158,32 +158,32 @@ td{
             'summaryText' => '',
             'columns'=>array(
 
-                //'ID',
-                'DESCRIPTION',
+                //'id',
+                'description',
                
                 array(
                     'header'=>'App',
                     'filter'=>CHtml::listData(App::model()->findAll(),'name', 'name'),
-                    'name'=>'ID_APP',
+                    'name'=>'id_app',
                     'value'=>'$data->iDAPP->name'
                 ),
                 array(
                     'header'=>'Platform',
                     'filter'=>CHtml::listData(Platforms::model()->findAll(),'name', 'name'),
-                    'name'=>'ID_PLATFORM',
+                    'name'=>'id_platform',
                     'value'=>'$data->iDPLATFORM->name'
                 ),
 
                 array(
                     'header'=>'Device',
-                    'filter'=>CHtml::listData(Device::model()->findAll(),'DESCRIPTION', 'DESCRIPTION'),
-                    'name'=>'ID_DEVICE',
-                    'value'=>'$data->iDDEVICE->DESCRIPTION'
+                    'filter'=>CHtml::listData(Device::model()->findAll(),'description', 'description'),
+                    'name'=>'id_device',
+                    'value'=>'$data->iDDEVICE->description'
                 ),
 
                 array(
                     'header'=>'User',
-                    'name'=>'ID_USER',
+                    'name'=>'id_user',
                     'value'=>'$data->iDUSER->name'
                 ),
                 /*array(
@@ -196,43 +196,6 @@ td{
          ?>
     </div>
     
-    <!--div class="variations">
-        <b>Variations in the round</b-->
-        <!--?php 
-
-        $this->widget('bootstrap.widgets.TbGridView', array(
-            'id'=>'users-grid',
-
-            'dataProvider'=>$dataProviderInst,
-            //'enablePagination' => false,
-            'summaryText' => '',
-            'columns'=>array(
-                array(
-                    'header'=>'Element',
-                    'value'=>'$data->iDELEMENT->DESCRIPTION'
-                ),
-                'DESCRIPTION',
-                //'BEHAVIOR',
-                'ELEMENT_TYPE',
-                'START_PARAM',
-                'END_PARAM',
-                /*array(
-                    'name'=>'BEHAVIOR_SCREEN',
-                    'type'=>'raw',
-                    'value'=> 'CHtml::linkButton($data->BEHAVIOR_SCREEN, array(
-                        "href"=>"/mtcontrool/upload_testcontext/".$data->BEHAVIOR_SCREEN,
-                        "target"=>"_blank",
-                        //"submit"=>array("arquivo/mostrarArquivo&url=".$data->BEHAVIOR_SCREEN, $_GET),
-                    ))',
-                ),*/
-               
-                
-                
-             ),
-        ));
-
-        ?-->
-    <!--/div-->
 
     <div class="variations">
         <b>Variations in the Round of Testing</b>
@@ -245,22 +208,22 @@ td{
             <div class="table_vars">
                 <?php foreach ($arrayModels as $model): ?>
                     <table class="table_body">
-                    <?php  if($model->iDELEMENT->DESCRIPTION!=$anterior):?>
+                    <?php  if($model->iDELEMENT->description!=$anterior):?>
                         <?php if($inicio!="sim"): ?>
                             <br/>
                         <?php endif; ?>
                         <?php $inicio="nao"; ?>
                             <p class="element_name">
-                                <?php echo $model->iDELEMENT->DESCRIPTION; ?> (<?php echo $model->ELEMENT_TYPE; ?>)
+                                <?php echo $model->iDELEMENT->description; ?> (<?php echo $model->element_type; ?>)
                                 <?php $count_var=1; ?>
                             </p>
-                         <?php $anterior = $model->iDELEMENT->DESCRIPTION?>
+                         <?php $anterior = $model->iDELEMENT->description?>
                          <thead class="table_head">
                             <tr>
                                 <td class="line_number">Nº</td>
                                 <td>Variation</td>
                                 <!--td>Type</td-->
-                                <?php if($model->ELEMENT_TYPE=="interval"): ?>
+                                <?php if($model->element_type=="interval"): ?>
                                     <td>Start</td>
                                     <td>End</td>
                                 <?php endif; ?>
@@ -270,11 +233,11 @@ td{
                         <tbody class="body_lines">
                             <tr>
                                 <td class="line_number"><?php echo $count_var; ?></td>
-                                <td><?php echo $model->DESCRIPTION ?></td>
+                                <td><?php echo $model->description ?></td>
                                 <!--td><?php echo $model->ELEMENT_TYPE ?></td-->
-                                <?php if($model->ELEMENT_TYPE=="interval"): ?>
-                                    <td><?php echo $model->START_PARAM ?></td>
-                                    <td><?php echo $model->END_PARAM ?></td>
+                                <?php if($model->element_type=="interval"): ?>
+                                    <td><?php echo $model->start_param ?></td>
+                                    <td><?php echo $model->end_param ?></td>
                                 <?php endif; ?>
                             </tr>
                         </tbody>

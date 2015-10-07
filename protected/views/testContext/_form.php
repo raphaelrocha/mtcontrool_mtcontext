@@ -105,7 +105,7 @@
     <?php echo $form->errorSummary($model); ?>
 
         
-            <?php //echo $form->textFieldControlGroup($model,'ID_USER',array('span'=>5)); ?>
+            <?php //echo $form->textFieldControlGroup($model,'id_user',array('span'=>5)); ?>
             <font size="4">
             <?php echo "<b>Current user: </b>";?>
 
@@ -114,24 +114,14 @@
             </font>
             <br/><br/>
 
-            <?php echo $form->textFieldControlGroup($model,'DESCRIPTION',array('span'=>5,'maxlength'=>50)); ?>
+            <?php echo $form->textFieldControlGroup($model,'description',array('span'=>5,'maxlength'=>50)); ?>
         
 
             
-            <?php echo $form->dropDownListControlGroup($model,'ID_APP',$appsArray, array('id'=>'dd0',/*"disabled"=>"disabled",*/ 'empty' => '--- Choose a app ---','onchange'=>'Hab()')); ?>
+            <?php echo $form->dropDownListControlGroup($model,'id_app',$appsArray, array('id'=>'dd0',/*"disabled"=>"disabled",*/ 'empty' => '--- Choose a app ---','onchange'=>'Hab()')); ?>
 
             <?php 
-            //echo $form->dropDownListControlGroup($model,'ID_PLATFORM',$platformsArray, array(/*'id'=>'BrandField',"disabled"=>"disabled",*/ 'empty' => '--- Choose a platform ---'),
-            /*echo $form->dropDownListControlGroup($model,'ID_PLATFORM',CHtml::listData(platformS::model()->findAll(),'id', 'name'),array('id'=>'platformsDropDown','empty'=>'--- Choose a device ---'),
-            array(
-                                'ajax' => array(
-                                    'type' => 'POST',
-                                    'url' => CController::createUrl('TestContext/ListDevices'),
-                                    //'TestCase' => 'TESTE',
-                                    'update' => '#'.CHtml::activeId($model,'ID_DEVICE'),
-                                    //'update'=>'#device_id',
-                                ),'prompt'=>'Select')
-                            );*/
+            
             echo $form->dropDownListControlGroup($model,
                                       'ID_PLATFORM',
                                       $platformsArray,
@@ -147,42 +137,9 @@
 
             <?php echo $form->dropDownListControlGroup($model,'ID_DEVICE',$devicesArray,array('id'=>'dd2','empty'=>'--- Choose a device ---')); ?>
             
-            <?php //echo $form->dropDownListControlGroup($model,'ID_DEVICE',array(),array('id'=>'devicesDropDown','prompt'=>'Select')); ?>
-
             
 
-
-
-
-
-            <div class="row">
-               <?php //echo $form->labelEx($model,'ID_PLATFORM'); ?>
-               <?php //$categories=Yii::app()->Datacomponent->usercategory();
-               /*echo $form->dropDownListControlGroup($model,
-                                      'ID_PLATFORM',
-                                      $platformsArray,
-                                      array('empty'=>'Select platform ',
-                                        'ajax'=>array(
-                                            'type'=>'POST',
-                                            'url'=>CController::createUrl('testcontext/listdevices'),
-                                            'update'=>'#dd1',
-                                            'data'=>array('categoryid'=>'js:this.value'),
-                                         ),
-                                      ));*/ 
-              ?> 
-              <?php //echo $form->error($model,'ID_PLATFORM'); ?>
-            </div>
-                 
-            <div class="row">
-             <?php //echo $form->labelEx($model,'ID_DEVICE'); ?>
-             <?php //echo $form->dropDownList($model,'ID_DEVICE',array(),array('id'=>'dd1','empty'=>'Select DEVICE')); 
-            ?>
-            <?php //echo $form->error($model,'ID_DEVICE'); ?>
-        </div>
-
-
-
-
+         
 
         <br/>
 

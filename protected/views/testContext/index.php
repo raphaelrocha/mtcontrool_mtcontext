@@ -24,36 +24,36 @@ $this->menu=array(
 	'dataProvider'=>$model->search(),
 	'filter'=>$model,
 	'columns'=>array(
-		//'ID',
-		//'ID_USER',
+		//'id',
+		//'id_user',
 		array(
 			'header'=>'User',
 			'filter'=>CHtml::listData(Users::model()->findAll(),'name', 'name'),
-			'name'=>'ID_USER',
+			'name'=>'id_user',
 			'value'=>'$data->iDUSER->name'
 		),
-		//'ID_APP',
+		//'id_app',
 		array(
 			'header'=>'App',
 			'filter'=>CHtml::listData(App::model()->findAll(),'name', 'name'),
-			'name'=>'ID_APP',
+			'name'=>'id_app',
 			'value'=>'$data->iDAPP->name'
 		),
-		//'ID_PLATFORM',
+		//'id_platform',
 		array(
 			'header'=>'Platform',
 			'filter'=>CHtml::listData(Platforms::model()->findAll(),'name', 'name'),
-			'name'=>'ID_PLATFORM',
+			'name'=>'id_platform',
 			'value'=>'$data->iDPLATFORM->name'
 		),
-		//'ID_DEVICE',
+		//'id_device',
 		array(
 			'header'=>'Device',
-			'filter'=>CHtml::listData(Device::model()->findAll(),'DESCRIPTION', 'DESCRIPTION'),
+			'filter'=>CHtml::listData(Device::model()->findAll(),'description', 'description'),
 			'name'=>'ID_DEVICE',
-			'value'=>'$data->iDDEVICE->DESCRIPTION'
+			'value'=>'$data->iDDEVICE->description'
 		),
-		'DESCRIPTION',
+		'description',
 		array(
 			'class'=>'bootstrap.widgets.TbButtonColumn',
 			'template'=>'{update}&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{delete}',
