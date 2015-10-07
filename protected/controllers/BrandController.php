@@ -76,9 +76,9 @@ class BrandController extends Controller
 		if (isset($_POST['Brand'])) {
 			$model->attributes=$_POST['Brand'];
 			/*GARENTE QUE O NOME DA MARCA SEMPRE SEJA SALVO EM MAIÚSCULO*/
-			$model->BRAND_NAME = strtoupper($model->BRAND_NAME);
+			$model->brand_name = strtoupper($model->brand_name);
 			if ($model->save()) {
-				$this->redirect(array('admin','id'=>$model->ID));
+				$this->redirect(array('admin','id'=>$model->id));
 			}
 		}
 
@@ -107,9 +107,9 @@ class BrandController extends Controller
 		if (isset($_POST['Brand'])) {
 			$model->attributes=$_POST['Brand'];
 			/*GARENTE QUE O NOME DA MARCA SEMPRE SEJA SALVO EM MAIÚSCULO*/
-			$model->BRAND_NAME = strtoupper($model->BRAND_NAME);
+			$model->brand_name = strtoupper($model->brand_name);
 			if ($model->save()) {
-				$this->redirect(array('admin','id'=>$model->ID));
+				$this->redirect(array('admin','id'=>$model->id));
 			}
 		}
 

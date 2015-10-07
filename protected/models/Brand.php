@@ -28,11 +28,11 @@ class Brand extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('BRAND_NAME', 'required'),
-			array('BRAND_NAME', 'length', 'max'=>50),
+			array('brand_name', 'required'),
+			array('brand_name', 'length', 'max'=>50),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('ID, BRAND_NAME', 'safe', 'on'=>'search'),
+			array('ID, brand_name', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -44,7 +44,7 @@ class Brand extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'devices' => array(self::HAS_MANY, 'Device', 'ID_BRAND'),
+			'devices' => array(self::HAS_MANY, 'Device', 'id_brand'),
 		);
 	}
 
@@ -54,8 +54,8 @@ class Brand extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'ID' => 'ID',
-			'BRAND_NAME' => 'Brand Name',
+			'id' => 'ID',
+			'brand_name' => 'Brand Name',
 		);
 	}
 
@@ -77,8 +77,8 @@ class Brand extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('ID',$this->ID);
-		$criteria->compare('BRAND_NAME',$this->BRAND_NAME,true);
+		$criteria->compare('id',$this->ID);
+		$criteria->compare('brand_name',$this->BRAND_NAME,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -87,7 +87,7 @@ class Brand extends CActiveRecord
 
 	/*public function forList(){
 		return array(
-			'BRAND_NAME' => $this->BRAND_NAME,
+			'brand_name' => $this->brand_name,
 		);
 	}*/
 
