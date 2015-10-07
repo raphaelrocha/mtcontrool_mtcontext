@@ -53,20 +53,20 @@
 		//'ID_BRAND',
 		array(
 			'header'=>'Model',
-			//'filter'=>Brand::model()->forList(),
-			'name'=>'DESCRIPTION',
-			//'value'=>'$data->iDBRAND->BRAND_NAME'
+			//'filter'=>brand::model()->forList(),
+			'name'=>'description',
+			//'value'=>'$data->iDBRAND->brand_name'
 		),
 		array(
 			'header'=>'Brand',
-			'filter'=>CHtml::listData(Brand::model()->findAll(),'BRAND_NAME', 'BRAND_NAME'),
-			'name'=>'ID_BRAND',
-			'value'=>'$data->iDBRAND->BRAND_NAME'
+			'filter'=>CHtml::listData(Brand::model()->findAll(),'brand_name', 'brand_name'),
+			'name'=>'id_brand',
+			'value'=>'$data->iDBRAND->brand_name'
 		),
 		array(
 			'header'=>'Platform',
 			'filter'=>CHtml::listData(Platforms::model()->findAll(),'name', 'name'),
-			'name'=>'ID_PLATFORM',
+			'name'=>'id_platform',
 			'value'=>'$data->iDPLATFORM->name'
 		),
 		

@@ -50,7 +50,7 @@ class Device extends CActiveRecord
 		return array(
 			'iDBRAND' => array(self::BELONGS_TO, 'Brand', 'id_brand'),
 			'iDPLATFORM' => array(self::BELONGS_TO, 'Platforms', 'id_platform'),
-			//'DEVICE_BRAND_NAME' => array(self::BELONGS_TO, 'Brand', 'BRAND_NAME'),
+			//'DEVICE_BRAND_NAME' => array(self::BELONGS_TO, 'Brand', 'brand_name'),
 		);
 	}
 
@@ -95,7 +95,7 @@ class Device extends CActiveRecord
 		$criteria->with=array('iDBRAND','iDPLATFORM');
 		//$criteria->with=array('iDBRAND');
 		$criteria->compare('iDPLATFORM.name',$this->id_platform, true);
-		$criteria->compare('iDBRAND.BRAND_NAME',$this->id_brand, true);
+		$criteria->compare('iDBRAND.brand_name',$this->id_brand, true);
 
 		
 		$criteria->together=true;
