@@ -44,7 +44,7 @@ class ElementInst extends CActiveRecord
 			array('description', 'length', 'max'=>50),
 			array('behavior', 'length', 'max'=>50),
 			array('sent', 'length', 'max'=>500),
-			array('behavior_screen', 'file', 'types' => 'jpg, png, jpeg, pdf', 'allow empty'=>true),
+			array('behavior_screen', 'file', 'types' => 'jpg, png, jpeg, pdf', 'allowEmpty'=>true),
 			// the following rule is used by search().
 			// @todo please remove those attributes that should not be searched.
 			array('id, id_element, sent, id_test_context, element_type, behavior, behavior_screen, description, start_param, end_param', 'safe', 'on'=>'search'),
