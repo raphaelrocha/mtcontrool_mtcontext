@@ -47,15 +47,12 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 	'dataProvider'=>$model->search(),
 	'filter'=>$model,
 	'columns'=>array(
-		'ID',
-		'ID_TEST_CONTEXT',
-		'SEQUENCE_ORDER',
-		'VARIATION',
-		'BEHAVIOR',
-		'BEHAVIOR_SCREEN',
-		/*
-		'DATE_TIME',
-		*/
+		'id',
+		'id_test_context',
+		'sequence_order',
+		'variation',
+		'behavior',
+		'behavior_screen',
 		array(
 			'class'=>'bootstrap.widgets.TbButtonColumn',
 		),
