@@ -23,6 +23,11 @@ class Element extends CActiveRecord
 	public $ID_DEV;
 	public $DROPDOWN;
 
+	public function tableName()
+	{
+		return 'element';
+	}
+
 	/**
 	 * @return array validation rules for model attributes.
 	 */
