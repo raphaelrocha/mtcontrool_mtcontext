@@ -32,7 +32,7 @@ class Brand extends CActiveRecord
 			array('brand_name', 'length', 'max'=>50),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('ID, brand_name', 'safe', 'on'=>'search'),
+			array('id, brand_name', 'safe', 'on'=>'search'),
 		);
 	}
 
