@@ -8,15 +8,21 @@
  * @property string $DESCRIPTION
  *
  * The followings are the available model relations:
- * @property Device[] $devices
  * @property ElementInst[] $elementInsts
- * @property Platforms[] $platforms
+ * @property ElementPlatform[] $elementPlatforms
+ * @property TestContext[] $testContexts
  */
 class Element extends CActiveRecord
 {
 	/**
 	 * @return string the associated database table name
 	 */
+
+	//private $idCache;
+	public $ID_PLAT;
+	public $ID_DEV;
+	public $DROPDOWN;
+
 	public function tableName()
 	{
 		return 'element';
@@ -57,68 +63,20 @@ class Element extends CActiveRecord
 		);
 	}
 
+	public function behaviors(){
+		return array(
+				'CSaveRelationsBehavior' => array('class' => 'application.components.CSaveRelationsBehavior'),
+		);
+	}
+
 	/**
 	 * @return array customized attribute labels (name=>label)
 	 */
 	public function attributeLabels()
 	{
 		return array(
-			'ID' => 'ID',
-			'DESCRIPTION' => 'Description',
-		);
-	}
-
-	/**
-	 * Retrieves a list of models based on the current search/filter conditions.
-	 *
-	 * Typical usecase:
-	 * - Initialize the model fields with values from filter form.
-	 * - Execute this method to get CActiveDataProvider instance which will filter
-	 * models according to data in model fields.
-	 * - Pass data provider to CGridView, CListView or any similar widget.
-	 *
-	 * @return CActiveDataProvider the data provider that can return the models
-	 * based on the search/filter conditions.
-	 */
-	public function search()
-	{
-		// @todo Please modify the following code to remove attributes that should not be searched.
-
-		$criteria=new CDbCriteria;
-
-		$criteria->compare('id',$this->id);
-		$criteria->compare('description',$this->description,true);
-		$criteria->order = 'description asc';
-
-		$criteria->with=array('elementPlatforms','elementDevices');
-		//$criteria->with=array('elementPlatforms');
-		$criteria->compare('elementPlatforms.id_platform',$this->ID_PLAT, true);
-		$criteria->compare('elementDevices.id_device',$this->ID_DEV, true);
-		$criteria->together=true;
-
-
-		return new CActiveDataProvider($this, array(
-			'pagination' => array(
-             'pageSize' => 1000,
-        	),
-			'criteria'=>$criteria,
-		));
-	}
-
-	/**
-	 * Returns the static model of the specified AR class.
-	 * Please note that you should have this exact method in all your CActiveRecord descendants!
-	 * @param string $className active record class name.
-	 * @return Element the static model class
-	 */
-	public static function model($className=__CLASS__)
-	{
-		return parent::model($className);
-	}
-
-	public function behaviors(){
-		return array(
-				'CSaveRelationsBehavior' => array('class' => 'application.components.CSaveRelationsBehavior'),
+			'id' => 'Id',
+			'description' => 'Description',
 		);
 	}
 
@@ -170,4 +128,81 @@ class Element extends CActiveRecord
 		}
 		return $return;
 	}
+
+	/**
+	 * Retrieves a list of models based on the current search/filter conditions.
+	 *
+	 * Typical usecase:
+	 * - Initialize the model fields with values from filter form.
+	 * - Execute this method to get CActiveDataProvider instance which will filter
+	 * models according to data in model fields.
+	 * - Pass data provider to CGridView, CListView or any similar widget.
+	 *
+	 * @return CActiveDataProvider the data provider that can return the models
+	 * based on the search/filter conditions.
+	 */
+	public function search()
+	{
+		// @todo Please modify the following code to remove attributes that should not be searched.
+
+		$criteria=new CDbCriteria;
+
+		$criteria->compare('id',$this->id);
+		$criteria->compare('description',$this->description,true);
+		$criteria->order = 'description asc';
+
+		$criteria->with=array('elementPlatforms','elementDevices');
+		//$criteria->with=array('elementPlatforms');
+		$criteria->compare('elementPlatforms.id_platform',$this->ID_PLAT, true);
+		$criteria->compare('elementDevices.id_device',$this->ID_DEV, true);
+		$criteria->together=true;
+
+
+		return new CActiveDataProvider($this, array(
+			'pagination' => array(
+             'pageSize' => 1000,
+        	),
+			'criteria'=>$criteria,
+		));
+	}
+
+
+	/**
+	 * Returns the static model of the specified AR class.
+	 * Please note that you should have this exact method in all your CActiveRecord descendants!
+	 * @param string $className active record class name.
+	 * @return Element the static model class
+	 */
+	public static function model($className=__CLASS__)
+	{
+		return parent::model($className);
+	}
+	
+
+    /*public function beforeDelete()
+    {
+        $this->idCache = $this->id;
+
+        return parent::beforeDelete();
+    }
+
+    public function afterDelete()
+    {
+        $criteria = new CDbCriteria(array(
+                'condition' => 'parent_id=:parentId',
+                'params' => array(
+                    ':parentId' => $this->idCache),
+            ));
+
+        $children = Child::model()->findAll($criteria);
+
+        foreach ($children as $child)
+        {
+            $child->delete();
+        }
+
+        parent::afterDelete();
+    }*/
+
+
 }
